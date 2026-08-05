@@ -5,47 +5,41 @@ using System.IO.Compression;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// ===== CONFIGURAR USER SECRETS =====
-// Carrega secrets.json apenas em desenvolvimento
+// Configurar User Secrets
 if (builder.Environment.IsDevelopment())
 {
     builder.Configuration.AddUserSecrets<Program>();
 }
 
-// Carrega variáveis de ambiente (para produção)
-builder.Configuration.AddEnvironmentVariables();
-
-// ===== SERVICES =====
+// Add services
 builder.Services.AddControllersWithViews();
 builder.Services.AddMemoryCache();
 builder.Services.AddHttpClient();
-
-// ===== WEATHER SERVICE =====
 builder.Services.AddScoped<IWeatherService, WeatherService>();
 
-// ===== COMPRESSION =====
+// Add compression
 builder.Services.AddResponseCompression(options =>
 {
     options.EnableForHttps = true;
     options.Providers.Add<GzipCompressionProvider>();
 });
 
-// ===== RATE LIMITING =====
+// ADD RATE LIMITING
 builder.Services.AddRateLimiter(options =>
 {
     options.AddFixedWindowLimiter("WeatherAPI", opt =>
     {
-        opt.PermitLimit = 100; // 100 chamadas por minuto
+        opt.PermitLimit = 100;
         opt.Window = TimeSpan.FromMinutes(1);
         opt.QueueProcessingOrder = System.Threading.RateLimiting.QueueProcessingOrder.OldestFirst;
         opt.QueueLimit = 5;
     });
 });
 
-// ===== HEALTH CHECKS =====
+// ADD HEALTH CHECKS
 builder.Services.AddHealthChecks();
 
-// ===== CORS =====
+// CORS
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll", policy =>
@@ -56,10 +50,9 @@ builder.Services.AddCors(options =>
     });
 });
 
-// ===== BUILD APP =====
 var app = builder.Build();
 
-// ===== PIPELINE =====
+// Configure pipeline - CORRETO PARA PRODUÇÃO
 if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
@@ -74,14 +67,15 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
 
+// USE RATE LIMITING
 app.UseRateLimiter();
+
 app.UseCors("AllowAll");
 app.UseAuthorization();
 
-// ===== HEALTH CHECK =====
+// HEALTH CHECK ENDPOINT
 app.MapHealthChecks("/health");
 
-// ===== ROTAS =====
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Weather}/{action=Index}/{id?}");
