@@ -1,0 +1,413 @@
+/* ========================================
+   AMS360 - Previsão 7 Dias (DESIGN OTIMIZADO)
+   ======================================== */
+
+/* ===== HEADER ===== */
+.previsao-header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.previsao-header h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.92);
+}
+
+.previsao-header h3 i {
+    color: #7ad0ff;
+    margin-right: 10px;
+}
+
+/* ===== CLIMA ATUAL ===== */
+.current-weather-summary {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 16px;
+    padding: 1.2rem 1.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    margin-bottom: 1.5rem;
+}
+
+.current-weather-main {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+}
+
+.current-weather-main .current-weather-icon {
+    font-size: 3rem;
+}
+
+.current-weather-main .current-temp {
+    font-size: 2rem;
+    font-weight: 700;
+    color: white;
+}
+
+.current-weather-main .current-desc {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.9rem;
+}
+
+.current-weather-details {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.current-weather-details .detail-item {
+    text-align: center;
+}
+
+.current-weather-details .detail-item .label {
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.3);
+    letter-spacing: 0.5px;
+    display: block;
+}
+
+.current-weather-details .detail-item .value {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.current-weather-details .detail-item .value.high { color: #f9b84a; }
+.current-weather-details .detail-item .value.low { color: #7ad0ff; }
+.current-weather-details .detail-item .value.humidity { color: #93c5fd; }
+.current-weather-details .detail-item .value.wind { color: #6fc3df; }
+.current-weather-details .detail-item .value.pressure { color: #a8b4c8; }
+
+/* ===== STATS SUMMARY ===== */
+.stat-summary-card {
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: 14px;
+    padding: 1rem;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    transition: 0.3s;
+}
+
+.stat-summary-card:hover {
+    background: rgba(255, 255, 255, 0.07);
+    transform: translateY(-3px);
+}
+
+.stat-summary-card i {
+    font-size: 1.8rem;
+    display: block;
+    margin-bottom: 4px;
+}
+
+.stat-summary-card .stat-value {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: white;
+}
+
+.stat-summary-card .stat-label {
+    font-size: 0.65rem;
+    color: rgba(255, 255, 255, 0.35);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* ===== CARDS DE PREVISÃO 7 DIAS ===== */
+.forecast-card-7 {
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: 14px;
+    padding: 1rem 0.8rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    height: 100%;
+    position: relative;
+}
+
+.forecast-card-7:hover {
+    background: rgba(255, 255, 255, 0.07);
+    border-color: rgba(255, 255, 255, 0.08);
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+}
+
+.forecast-card-7.current-day {
+    background: rgba(122, 208, 255, 0.08);
+    border-color: rgba(122, 208, 255, 0.2);
+}
+
+.forecast-card-7 .today-badge {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: linear-gradient(135deg, #7ad0ff, #4a9eff);
+    color: #0b1a2f;
+    font-size: 0.5rem;
+    font-weight: 700;
+    padding: 2px 10px;
+    border-radius: 20px;
+    box-shadow: 0 0 20px rgba(122, 208, 255, 0.2);
+}
+
+.forecast-card-7 .day-name {
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.85rem;
+}
+
+.forecast-card-7.current-day .day-name {
+    color: #7ad0ff;
+}
+
+.forecast-card-7 .day-date {
+    font-size: 0.6rem;
+    color: rgba(255, 255, 255, 0.3);
+}
+
+.forecast-card-7 .day-icon {
+    font-size: 2.2rem;
+    display: block;
+    margin: 4px 0;
+}
+
+.forecast-card-7 .day-temp-max {
+    font-weight: 700;
+    color: white;
+    font-size: 1.1rem;
+}
+
+.forecast-card-7 .day-temp-max .day-temp-min {
+    color: rgba(255, 255, 255, 0.3);
+    font-weight: 400;
+}
+
+.forecast-card-7 .day-desc {
+    font-size: 0.65rem;
+    color: rgba(255, 255, 255, 0.4);
+    margin: 2px 0;
+}
+
+.forecast-card-7 .day-details {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    font-size: 0.55rem;
+    color: rgba(255, 255, 255, 0.3);
+}
+
+.forecast-card-7 .day-details .detail-item {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+}
+
+.forecast-card-7 .day-divider {
+    width: 30px;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.05);
+    margin: 6px auto;
+}
+
+.forecast-card-7 .day-stats {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    font-size: 0.6rem;
+}
+
+.forecast-card-7 .day-stats .stat-high {
+    color: #f9b84a;
+}
+
+.forecast-card-7 .day-stats .stat-low {
+    color: #7ad0ff;
+}
+
+/* ===== TABELA ===== */
+.table-wrapper {
+    overflow-x: auto;
+}
+
+.previsao-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+}
+
+.previsao-table thead th {
+    color: rgba(255, 255, 255, 0.4);
+    font-weight: 500;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 10px 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    text-align: left;
+}
+
+.previsao-table tbody td {
+    padding: 10px 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.previsao-table tbody tr:hover td {
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.previsao-table .temp-high { color: #f9b84a; font-weight: 600; }
+.previsao-table .temp-low { color: #7ad0ff; font-weight: 600; }
+
+.table-row-today td {
+    background: rgba(122, 208, 255, 0.05);
+    border-left: 3px solid #7ad0ff;
+}
+
+.today-badge-table {
+    color: #7ad0ff;
+    font-size: 0.6rem;
+}
+
+.rain-chance-badge {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 2px 10px;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.rain-chance-badge.high {
+    background: rgba(74, 158, 255, 0.15);
+    color: #4a9eff;
+}
+
+/* ===== GRÁFICOS ===== */
+.chart-container {
+    position: relative;
+    height: 220px;
+    width: 100%;
+}
+
+/* ===== BOTÕES ===== */
+.btn-back {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    color: rgba(255, 255, 255, 0.7);
+    border-radius: 40px;
+    padding: 0.4rem 1.2rem;
+    transition: 0.3s;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.85rem;
+}
+
+.btn-back:hover {
+    background: rgba(122, 208, 255, 0.08);
+    border-color: rgba(122, 208, 255, 0.2);
+    color: white;
+    transform: translateY(-2px);
+}
+
+.badge-city {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    color: rgba(255, 255, 255, 0.7);
+    padding: 0.5rem 1.2rem;
+    border-radius: 40px;
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+.badge-city i {
+    color: #7ad0ff;
+    margin-right: 6px;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 992px) {
+    .current-weather-summary {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+    .current-weather-details {
+        width: 100%;
+        justify-content: space-between;
+    }
+    .chart-container {
+        height: 180px;
+    }
+}
+
+@media (max-width: 768px) {
+    .previsao-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+    .current-weather-main .current-weather-icon {
+        font-size: 2.2rem;
+    }
+    .current-weather-main .current-temp {
+        font-size: 1.5rem;
+    }
+    .current-weather-details {
+        gap: 0.8rem;
+    }
+    .current-weather-details .detail-item .value {
+        font-size: 0.8rem;
+    }
+    .forecast-card-7 .day-icon {
+        font-size: 1.8rem;
+    }
+    .stat-summary-card .stat-value {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .current-weather-details {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.5rem;
+    }
+    .current-weather-main .current-weather-icon {
+        font-size: 1.8rem;
+    }
+    .current-weather-main .current-temp {
+        font-size: 1.2rem;
+    }
+    .forecast-card-7 {
+        padding: 0.6rem 0.4rem;
+    }
+    .forecast-card-7 .day-icon {
+        font-size: 1.5rem;
+    }
+    .forecast-card-7 .day-temp-max {
+        font-size: 0.9rem;
+    }
+    .forecast-card-7 .day-details {
+        flex-wrap: wrap;
+        font-size: 0.5rem;
+    }
+    .chart-container {
+        height: 150px;
+    }
+    .previsao-table {
+        font-size: 0.7rem;
+    }
+    .previsao-table thead th,
+    .previsao-table tbody td {
+        padding: 6px 8px;
+    }
+}

@@ -1,0 +1,453 @@
+/* ========================================
+   AMS360 - Páginas de Erro
+   ======================================== */
+
+.error-wrapper {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #0b1a2f;
+    padding: 2rem;
+}
+
+.error-card {
+    max-width: 700px;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 32px;
+    box-shadow: 0 25px 50px -8px rgba(0, 0, 0, 0.6);
+    padding: 3rem 2.5rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.error-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=2070&auto=format&fit=crop') center/cover no-repeat;
+    opacity: 0.05;
+    z-index: 0;
+}
+
+.error-card > * {
+    position: relative;
+    z-index: 1;
+}
+
+.error-icon {
+    font-size: 5rem;
+    line-height: 1;
+    display: block;
+    margin-bottom: 1rem;
+    animation: errorFloat 3s ease-in-out infinite;
+    color: #ff6b6b;
+}
+
+.error-icon.error-icon-404 {
+    color: #f9b84a;
+}
+
+.error-icon.error-icon-403 {
+    color: #ff6b6b;
+}
+
+.error-icon.error-icon-500 {
+    color: #ff6b6b;
+}
+
+.error-icon.error-icon-503 {
+    color: #7ad0ff;
+}
+
+@keyframes errorFloat {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    25% { transform: translateY(-8px) rotate(-3deg); }
+    75% { transform: translateY(-8px) rotate(3deg); }
+}
+
+.error-code {
+    font-size: 5rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+}
+
+.error-code.error-code-404 {
+    background: linear-gradient(135deg, #f9b84a, #f59e0b);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.error-code.error-code-403 {
+    background: linear-gradient(135deg, #ff6b6b, #dc2626);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.error-code.error-code-500 {
+    background: linear-gradient(135deg, #ff6b6b, #dc2626);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.error-code.error-code-503 {
+    background: linear-gradient(135deg, #7ad0ff, #2563eb);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.error-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.92);
+    margin-bottom: 0.5rem;
+}
+
+.error-message {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    line-height: 1.6;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.error-details {
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: 16px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    text-align: left;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.error-details .detail-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.error-details .detail-item:last-child {
+    border-bottom: none;
+}
+
+.error-details .detail-label {
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 0.85rem;
+}
+
+.error-details .detail-value {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.error-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+}
+
+.btn-error {
+    padding: 0.7rem 2rem;
+    border-radius: 40px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.95rem;
+}
+
+.btn-error-primary {
+    background: linear-gradient(135deg, #7ad0ff, #2b7fc4);
+    color: white;
+    border: none;
+}
+
+.btn-error-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(122, 208, 255, 0.3);
+    color: white;
+}
+
+.btn-error-secondary {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.btn-error-secondary:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: white;
+    transform: translateY(-2px);
+}
+
+.error-footer {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.04);
+    color: rgba(255, 255, 255, 0.25);
+    font-size: 0.75rem;
+}
+
+.error-footer i {
+    color: #7ad0ff;
+}
+
+/* Animação de shake */
+.shake {
+    animation: shake 0.5s ease-in-out;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    20% { transform: translateX(-15px); }
+    40% { transform: translateX(15px); }
+    60% { transform: translateX(-10px); }
+    80% { transform: translateX(10px); }
+}
+
+.pulse {
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .error-card {
+        padding: 2rem 1.5rem;
+        border-radius: 24px;
+    }
+    .error-code {
+        font-size: 4rem;
+    }
+    .error-icon {
+        font-size: 4rem;
+    }
+    .error-title {
+        font-size: 1.4rem;
+    }
+    .error-message {
+        font-size: 0.95rem;
+    }
+    .error-actions {
+        flex-direction: column;
+        align-items: center;
+    }
+    .btn-error {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .error-card {
+        padding: 1.5rem 1rem;
+        border-radius: 20px;
+    }
+    .error-code {
+        font-size: 3rem;
+    }
+    .error-icon {
+        font-size: 3rem;
+    }
+}
+
+/* Estilos específicos para erro meteorológico */
+.error-weather-wrapper {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #0b1a2f;
+    padding: 2rem;
+}
+
+.error-weather-card {
+    max-width: 600px;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 32px;
+    box-shadow: 0 25px 50px -8px rgba(0, 0, 0, 0.6);
+    padding: 3rem 2.5rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.error-weather-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=2070&auto=format&fit=crop') center/cover no-repeat;
+    opacity: 0.04;
+    z-index: 0;
+}
+
+.error-weather-card > * {
+    position: relative;
+    z-index: 1;
+}
+
+.weather-error-icon {
+    font-size: 4.5rem;
+    line-height: 1;
+    display: block;
+    margin-bottom: 1rem;
+    animation: weatherFloat 4s ease-in-out infinite;
+    color: #7ad0ff;
+}
+
+.weather-error-icon.icon-404 {
+    color: #f9b84a;
+}
+
+.weather-error-icon.icon-error {
+    color: #ff6b6b;
+}
+
+.weather-error-icon.icon-server {
+    color: #a78bfa;
+}
+
+@keyframes weatherFloat {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    25% { transform: translateY(-8px) rotate(-5deg); }
+    75% { transform: translateY(-8px) rotate(5deg); }
+}
+
+.weather-error-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.92);
+    margin-bottom: 0.5rem;
+}
+
+.weather-error-message {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+
+.weather-error-suggestions {
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: 16px;
+    padding: 1.2rem 1.5rem;
+    margin-bottom: 1.5rem;
+    text-align: left;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.weather-error-suggestions .suggestion-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0.5rem 0;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.9rem;
+}
+
+.weather-error-suggestions .suggestion-item i {
+    color: #7ad0ff;
+    font-size: 1.1rem;
+    width: 24px;
+    text-align: center;
+}
+
+.weather-error-suggestions .suggestion-item:hover {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.btn-weather-error {
+    padding: 0.7rem 2rem;
+    border-radius: 40px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.95rem;
+    background: linear-gradient(135deg, #7ad0ff, #2b7fc4);
+    color: white;
+    border: none;
+}
+
+.btn-weather-error:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(122, 208, 255, 0.3);
+    color: white;
+}
+
+.error-cities-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.error-city-tag {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 20px;
+    padding: 0.3rem 1rem;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.8rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.error-city-tag:hover {
+    background: rgba(122, 208, 255, 0.08);
+    border-color: rgba(122, 208, 255, 0.2);
+    color: white;
+    transform: translateY(-2px);
+}
+
+.error-weather-footer {
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.04);
+    color: rgba(255, 255, 255, 0.25);
+    font-size: 0.7rem;
+}
+
+@media (max-width: 576px) {
+    .error-weather-card {
+        padding: 2rem 1.5rem;
+    }
+    .weather-error-icon {
+        font-size: 3.5rem;
+    }
+    .weather-error-title {
+        font-size: 1.2rem;
+    }
+}

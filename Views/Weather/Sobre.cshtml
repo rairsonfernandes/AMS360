@@ -1,0 +1,354 @@
+﻿@using AMS360.Models
+@model WeatherViewModel
+@{
+    ViewData["Title"] = "AMS360 | Sobre";
+    var current = Model?.CurrentWeather;
+}
+
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+
+    <!-- Bootstrap 5 + Icons + Font -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz@14..32&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- ===== FAVICONS ===== -->
+    <!-- Favicon principal (SVG) -->
+    <link rel="icon" type="image/svg+xml" href="~/images/logo/favicon.svg">
+    
+    <!-- Favicon PNG para navegadores antigos -->
+    <link rel="icon" type="image/png" sizes="32x32" href="~/images/logo/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="~/images/logo/favicon-16x16.png">
+    
+    <!-- Apple Touch Icon (iOS / iPadOS) -->
+    <link rel="apple-touch-icon" sizes="180x180" href="~/images/logo/apple-touch-icon.png">
+    
+    <!-- Android Chrome -->
+    <link rel="manifest" href="~/images/logo/site.webmanifest">
+    
+    <!-- Windows 8/10 -->
+    <meta name="msapplication-TileColor" content="#0b1a2f">
+    <meta name="msapplication-TileImage" content="~/images/logo/mstile-150x150.png">
+    
+    <!-- Site CSS -->
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true">
+    <link rel="stylesheet" href="~/css/Sobre.css" asp-append-version="true">
+</head>
+<body>
+
+<div class="dashboard-wrapper">
+    <div class="dashboard-bg">
+
+        <!-- ===== NAVBAR ===== -->
+        <nav class="navbar navbar-ams">
+            <div class="container-fluid px-0">
+                <a class="navbar-brand" href="/Weather/Index">
+                    <i class="bi bi-hurricane"></i> AMS360
+                    <span class="brand-sub">Advanced Meteorological Systems</span>
+                </a>
+
+                <div class="d-none d-lg-flex align-items-center gap-1">
+                    <a href="/Weather/Index" class="nav-link nav-link-ams">
+                        <i class="fas fa-tachometer-alt"></i> Dashboard
+                    </a>
+                    <a href="/Weather/Detalhes?city=@Model?.City" class="nav-link nav-link-ams">
+                        <i class="fas fa-chart-bar"></i> Detalhes
+                    </a>
+                    <a href="/Weather/PrevisaoCompleta?city=@Model?.City" class="nav-link nav-link-ams">
+                        <i class="fas fa-calendar-week"></i> Previsão 7 Dias
+                    </a>
+                    <a href="/Weather/Sobre" class="nav-link nav-link-ams active">
+                        <i class="fas fa-info-circle"></i> Sobre
+                    </a>
+                </div>
+
+                <div class="d-flex align-items-center gap-2">
+                    <div class="search-wrapper d-none d-md-flex">
+                        <i class="bi bi-search search-icon"></i>
+                        <form action="/Weather/Index" method="get" style="display:flex; align-items:center; margin:0;">
+                            <input type="text" name="city" class="form-control search-input" placeholder="Buscar cidade..." value="@Model?.City" />
+                            <button type="submit" class="search-btn"><i class="bi bi-arrow-right"></i></button>
+                        </form>
+                    </div>
+                    <button class="navbar-toggler-ams d-lg-none" onclick="toggleMobileMenu()">
+                        <i class="bi bi-list"></i>
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- ===== MENU MOBILE ===== -->
+        <div class="navbar-collapse-ams" id="mobileMenu">
+            <button class="close-menu-btn" onclick="toggleMobileMenu()"><i class="bi bi-x-lg"></i></button>
+            <div class="search-mobile-wrapper">
+                <form action="/Weather/Index" method="get" style="display:flex; align-items:center; width:100%; position:relative;">
+                    <i class="bi bi-search search-icon" style="position:absolute; left:14px; color:rgba(255,255,255,0.3); z-index:3;"></i>
+                    <input type="text" name="city" class="form-control search-input" placeholder="Buscar cidade..." style="width:100%; padding:0.7rem 3.2rem 0.7rem 3.2rem; background:rgba(255,255,255,0.04); border-color:rgba(255,255,255,0.06); color:white; border-radius:40px;" value="@Model?.City" />
+                    <button type="submit" class="search-btn" style="position:absolute; right:4px; background:rgba(255,255,255,0.04); border:none; border-radius:40px; color:rgba(255,255,255,0.4); padding:0.35rem 1rem; z-index:3;"><i class="bi bi-arrow-right"></i></button>
+                </form>
+            </div>
+            <div class="menu-divider"></div>
+            <a href="/Weather/Index" class="nav-link nav-link-ams" onclick="toggleMobileMenu()"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+            <a href="/Weather/Detalhes?city=@Model?.City" class="nav-link nav-link-ams" onclick="toggleMobileMenu()"><i class="fas fa-chart-bar"></i> Detalhes</a>
+            <a href="/Weather/PrevisaoCompleta?city=@Model?.City" class="nav-link nav-link-ams" onclick="toggleMobileMenu()"><i class="fas fa-calendar-week"></i> Previsão 7 Dias</a>
+            <a href="/Weather/Sobre" class="nav-link nav-link-ams active" onclick="toggleMobileMenu()"><i class="fas fa-info-circle"></i> Sobre</a>
+            <div class="menu-divider"></div>
+            <div class="menu-footer">
+                <i class="bi bi-geo-alt-fill me-1"></i> <span id="mobileCityName">@Model?.City, PT</span>
+                <br>
+                <span style="opacity:0.4; font-size:0.7rem;">AMS360 · Advanced Meteorological Systems</span>
+            </div>
+        </div>
+
+        <!-- ===== HEADER ===== -->
+        <div class="sobre-header">
+            <div>
+                <h3><i class="bi bi-info-circle"></i>Sobre o AMS360</h3>
+                <p class="text-soft-muted small mb-0">Conheça nossa plataforma, missão e criador</p>
+            </div>
+            <a href="/Weather/Index?city=@Model?.City" class="btn-back">
+                <i class="bi bi-arrow-left"></i> Voltar
+            </a>
+        </div>
+
+        <!-- ===== HERO ===== -->
+        <div class="row g-4 mb-4">
+            <div class="col-12">
+                <div class="glass-card p-5 text-center">
+                    <div class="about-hero-icon mb-3">
+                        <i class="bi bi-hurricane"></i>
+                    </div>
+                    <h2 class="text-soft-white fw-bold display-5">AMS360</h2>
+                    <p class="text-soft-muted fs-5" style="max-width: 700px; margin: 0 auto;">
+                        <span style="color:#7ad0ff;">Advanced Meteorological Systems</span> —
+                        Monitoramento meteorológico inteligente com visualização de dados em tempo real.
+                    </p>
+                    <div class="d-flex flex-wrap justify-content-center gap-2 mt-3">
+                        <span class="tech-badge"><i class="bi bi-check-circle-fill"></i> OpenWeather API</span>
+                        <span class="tech-badge"><i class="bi bi-check-circle-fill"></i> ASP.NET Core</span>
+                        <span class="tech-badge"><i class="bi bi-check-circle-fill"></i> Bootstrap 5</span>
+                        <span class="tech-badge"><i class="bi bi-check-circle-fill"></i> Chart.js</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== STATS ===== -->
+        <div class="row g-3 mb-4">
+            <div class="col-6 col-md-3">
+                <div class="about-stat">
+                    <div class="number">7</div>
+                    <div class="label">Dias de Previsão</div>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="about-stat">
+                    <div class="number">24</div>
+                    <div class="label">Cidades Monitoradas</div>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="about-stat">
+                    <div class="number">12</div>
+                    <div class="label">Indicadores Climáticos</div>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="about-stat">
+                    <div class="number">99.9%</div>
+                    <div class="label">Disponibilidade</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== MISSÃO + VALORES ===== -->
+        <div class="row g-4 mb-4">
+            <div class="col-lg-6">
+                <div class="glass-card p-4 h-100">
+                    <h5 class="text-soft-white fw-semibold mb-3">
+                        <i class="bi bi-bullseye me-2" style="color:#7ad0ff;"></i>Nossa Missão
+                    </h5>
+                    <p class="text-soft-muted" style="line-height: 1.8;">
+                        O <strong class="text-soft-white">AMS360</strong> nasceu da necessidade de fornecer informações meteorológicas
+                        precisas, acessíveis e visualmente atraentes para profissionais, empresas e entusiastas do clima.
+                    </p>
+                    <p class="text-soft-muted" style="line-height: 1.8;">
+                        Integramos dados da <strong class="text-soft-white">OpenWeather API</strong> com uma interface moderna e intuitiva,
+                        transformando números complexos em insights claros e acionáveis.
+                    </p>
+                    <div class="d-flex gap-2 flex-wrap mt-3">
+                        <span class="tech-badge"><i class="bi bi-eye-fill"></i> Transparência</span>
+                        <span class="tech-badge"><i class="bi bi-clock-fill"></i> Tempo Real</span>
+                        <span class="tech-badge"><i class="bi bi-shield-fill"></i> Confiabilidade</span>
+                        <span class="tech-badge"><i class="bi bi-graph-up-arrow"></i> Inovação</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="glass-card p-4 h-100">
+                    <h5 class="text-soft-white fw-semibold mb-3">
+                        <i class="bi bi-heart-fill me-2" style="color:#f9b84a;"></i>Nossos Valores
+                    </h5>
+                    <div class="row g-3">
+                        <div class="col-6">
+                            <div class="value-card">
+                                <span class="value-icon"><i class="bi bi-bullseye" style="color:#ffd93d;"></i></span>
+                                <div class="value-title">Precisão</div>
+                                <div class="value-desc">Dados confiáveis e atualizados</div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="value-card">
+                                <span class="value-icon"><i class="bi bi-rocket-takeoff" style="color:#7ad0ff;"></i></span>
+                                <div class="value-title">Inovação</div>
+                                <div class="value-desc">Tecnologia de ponta</div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="value-card">
+                                <span class="value-icon"><i class="bi bi-eye" style="color:#93c5fd;"></i></span>
+                                <div class="value-title">Transparência</div>
+                                <div class="value-desc">Comunicação clara e aberta</div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="value-card">
+                                <span class="value-icon"><i class="bi bi-globe2" style="color:#6fc3df;"></i></span>
+                                <div class="value-title">Acessibilidade</div>
+                                <div class="value-desc">Para todos, em qualquer lugar</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== TIMELINE ===== -->
+        <div class="row g-4 mb-4">
+            <div class="col-12">
+                <div class="glass-card p-4">
+                    <h5 class="text-soft-white fw-semibold mb-3">
+                        <i class="bi bi-clock-history me-2" style="color:#7ad0ff;"></i>Nossa Jornada
+                    </h5>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="timeline-item">
+                                <div class="timeline-dot"></div>
+                                <div class="timeline-content">
+                                    <div class="year">2024 · Fundação</div>
+                                    <div class="desc">Início do projeto com a visão de criar um dashboard meteorológico profissional e intuitivo.</div>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-dot" style="background: #f9b84a;"></div>
+                                <div class="timeline-content">
+                                    <div class="year">2025 · Integração API</div>
+                                    <div class="desc">Conexão com a OpenWeather API e implementação dos primeiros dados em tempo real.</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="timeline-item">
+                                <div class="timeline-dot" style="background: #6fc3df;"></div>
+                                <div class="timeline-content">
+                                    <div class="year">2026 · Lançamento</div>
+                                    <div class="desc">Versão 2.0 com interface renovada, gráficos interativos e previsão estendida para 7 dias.</div>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-dot" style="background: #f9e45b;"></div>
+                                <div class="timeline-content">
+                                    <div class="year">2026 · Expansão</div>
+                                    <div class="desc">Adição de novas cidades e indicadores climáticos avançados.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== TECNOLOGIAS ===== -->
+        <div class="row g-4 mb-4">
+            <div class="col-12">
+                <div class="glass-card p-4">
+                    <h5 class="text-soft-white fw-semibold mb-3">
+                        <i class="bi bi-code-square me-2" style="color:#7ad0ff;"></i>Stack Tecnológico
+                    </h5>
+                    <div class="d-flex flex-wrap gap-3">
+                        <span class="tech-badge"><i class="bi bi-microsoft"></i> ASP.NET Core</span>
+                        <span class="tech-badge"><i class="bi bi-filetype-cs"></i> C#</span>
+                        <span class="tech-badge"><i class="bi bi-bootstrap-fill"></i> Bootstrap 5</span>
+                        <span class="tech-badge"><i class="bi bi-filetype-js"></i> JavaScript</span>
+                        <span class="tech-badge"><i class="bi bi-bar-chart-fill"></i> Chart.js</span>
+                        <span class="tech-badge"><i class="bi bi-cloud-fill"></i> OpenWeather API</span>
+                        <span class="tech-badge"><i class="bi bi-git"></i> Git</span>
+                        <span class="tech-badge"><i class="bi bi-terminal"></i> RESTful API</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== CRIADOR ===== -->
+        <div class="row g-4 mb-4">
+            <div class="col-12">
+                <div class="glass-card p-4">
+                    <h5 class="text-soft-white fw-semibold mb-3">
+                        <i class="bi bi-person-fill me-2" style="color:#7ad0ff;"></i>Criador
+                    </h5>
+                    <div class="row">
+                        <div class="col-lg-6 mx-auto">
+                            <div class="creator-card">
+                                <div class="avatar">RF</div>
+                                <div class="name">Rairson Fernandes</div>
+                                <div class="role">Fundador & Desenvolvedor</div>
+                                <div class="bio">
+                                    Apaixonado por tecnologia, dados e inovação. Criador do AMS360 com o objetivo de
+                                    democratizar o acesso a informações meteorológicas precisas e de qualidade.
+                                </div>
+                                <div class="social-links">
+                                    <a href="https://github.com/rairsonfernandes" title="GitHub"><i class="bi bi-github"></i></a>
+                                    <a href="http://linkedin.com/in/rairsonfernandes" title="LinkedIn"><i class="bi bi-linkedin"></i></a>
+                                    <a href="rairsonfernandes@gmail.com" title="Email"><i class="bi bi-envelope"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== FOOTER ===== -->
+        <div class="row mt-3">
+            <div class="col-12">
+                <div class="footer-ams d-flex flex-wrap justify-content-between align-items-center">
+                    <span>
+                        <i class="bi bi-cloud-sun me-1"></i>
+                        Dados fornecidos por OpenWeather API &bull; &copy; 2026 AMS360 — Advanced Meteorological Systems
+                    </span>
+                    <span>
+                        <i class="bi bi-clock me-1"></i>
+                        Atualizado em <span id="updateTime">@DateTime.Now.ToString("dd/MM/yyyy, HH:mm:ss")</span>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- ===== SCRIPTS ===== -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+<script src="~/js/Sobre.js" asp-append-version="true"></script>
+
+</body>
+</html>

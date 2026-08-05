@@ -1,0 +1,292 @@
+/* ========================================
+   AMS360 - Página Sobre
+   ======================================== */
+
+/* ===== HEADER ===== */
+.sobre-header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.sobre-header h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.92);
+}
+
+.sobre-header h3 i {
+    color: #7ad0ff;
+    margin-right: 10px;
+}
+
+/* ===== ABOUT HERO ===== */
+.about-hero-icon {
+    font-size: 5rem;
+    color: #7ad0ff;
+    filter: drop-shadow(0 8px 32px rgba(122, 208, 255, 0.3));
+    display: inline-block;
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+/* ===== STATS ===== */
+.about-stat {
+    text-align: center;
+    padding: 1.2rem 0.5rem;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    transition: all 0.3s ease;
+}
+
+.about-stat:hover {
+    background: rgba(255, 255, 255, 0.06);
+    transform: translateY(-2px);
+}
+
+.about-stat .number {
+    font-size: 2.8rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #7ad0ff, #2b7fc4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1.2;
+}
+
+.about-stat .label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: rgba(255, 255, 255, 0.4);
+    font-weight: 500;
+    margin-top: 4px;
+}
+
+/* ===== TIMELINE ===== */
+.timeline-item {
+    display: flex;
+    gap: 16px;
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    transition: all 0.3s ease;
+}
+
+.timeline-item:last-child {
+    border-bottom: none;
+}
+
+.timeline-item:hover {
+    padding-left: 8px;
+}
+
+.timeline-dot {
+    width: 14px;
+    height: 14px;
+    min-width: 14px;
+    border-radius: 50%;
+    background: #7ad0ff;
+    margin-top: 4px;
+    box-shadow: 0 0 20px rgba(122, 208, 255, 0.3);
+    position: relative;
+}
+
+.timeline-dot::after {
+    content: '';
+    position: absolute;
+    top: 14px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: calc(100% + 10px);
+    background: rgba(255, 255, 255, 0.06);
+}
+
+.timeline-item:last-child .timeline-dot::after {
+    display: none;
+}
+
+.timeline-content .year {
+    font-weight: 600;
+    color: #7ad0ff;
+    font-size: 0.9rem;
+}
+
+.timeline-content .desc {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.95rem;
+}
+
+/* ===== TECH BADGES ===== */
+.tech-badge {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    padding: 0.5rem 1.2rem;
+    border-radius: 40px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 0.85rem;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.tech-badge:hover {
+    background: rgba(122, 208, 255, 0.08);
+    border-color: rgba(122, 208, 255, 0.2);
+    transform: translateY(-2px);
+    color: white;
+}
+
+.tech-badge i {
+    color: #7ad0ff;
+    font-size: 1rem;
+}
+
+/* ===== VALUE CARDS ===== */
+.value-card {
+    padding: 1.5rem 1rem;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    transition: all 0.3s ease;
+    height: 100%;
+}
+
+.value-card:hover {
+    background: rgba(255, 255, 255, 0.05);
+    transform: translateY(-3px);
+}
+
+.value-card .value-icon {
+    font-size: 2.8rem;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.value-card .value-title {
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 1rem;
+}
+
+.value-card .value-desc {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.4);
+    margin-top: 4px;
+}
+
+/* ===== CRIADOR ===== */
+.creator-card {
+    text-align: center;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: all 0.3s ease;
+}
+
+.creator-card:hover {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.08);
+    transform: translateY(-3px);
+}
+
+.creator-card .avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #7ad0ff, #2b7fc4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 16px;
+    font-size: 2.5rem;
+    color: white;
+    font-weight: 700;
+    box-shadow: 0 4px 30px rgba(122, 208, 255, 0.25);
+}
+
+.creator-card .name {
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1.3rem;
+}
+
+.creator-card .role {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.35);
+    margin-top: 4px;
+}
+
+.creator-card .bio {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.5);
+    margin-top: 8px;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.6;
+}
+
+.creator-card .social-links {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 12px;
+}
+
+.creator-card .social-links a {
+    color: rgba(255, 255, 255, 0.3);
+    font-size: 1.4rem;
+    transition: 0.3s;
+}
+
+.creator-card .social-links a:hover {
+    color: #7ad0ff;
+    transform: translateY(-2px);
+}
+
+/* ===== BOTÃO VOLTAR ===== */
+.btn-back {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    color: rgba(255, 255, 255, 0.7);
+    border-radius: 40px;
+    padding: 0.4rem 1.2rem;
+    transition: 0.3s;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.85rem;
+}
+
+.btn-back:hover {
+    background: rgba(122, 208, 255, 0.08);
+    border-color: rgba(122, 208, 255, 0.2);
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 992px) {
+    .about-hero-icon { font-size: 3.5rem; }
+    .about-stat .number { font-size: 2.2rem; }
+}
+
+@media (max-width: 576px) {
+    .about-stat .number { font-size: 1.8rem; }
+    .creator-card .avatar { width: 72px; height: 72px; font-size: 1.8rem; }
+    .value-card { padding: 1rem 0.5rem; }
+    .value-card .value-icon { font-size: 2rem; }
+}

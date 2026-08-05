@@ -1,0 +1,301 @@
+@using AMS360.Models
+@model DailyForecast
+@{
+    ViewData["Title"] = "AMS360 | Detalhes Meteorológicos";
+    var city = ViewBag.City ?? "Lisbon";
+    var date = Model?.Date ?? DateTime.Now;
+}
+
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+
+    <!-- Bootstrap 5 + Icons + Font -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz@14..32&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+    <!-- ===== FAVICONS ===== -->
+    <link rel="icon" type="image/svg+xml" href="~/images/logo/favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="~/images/logo/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="~/images/logo/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="~/images/logo/apple-touch-icon.png">
+    <link rel="manifest" href="~/images/logo/site.webmanifest">
+    <meta name="msapplication-TileColor" content="#0b1a2f">
+    <meta name="msapplication-TileImage" content="~/images/logo/mstile-150x150.png">
+
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true">
+    <link rel="stylesheet" href="~/css/Detalhes.css" asp-append-version="true">
+</head>
+<body>
+
+<div class="dashboard-wrapper">
+    <div class="dashboard-bg">
+
+        <!-- ===== NAVBAR ===== -->
+        <nav class="navbar navbar-ams">
+            <div class="container-fluid px-0">
+                <a class="navbar-brand" href="/Weather/Index">
+                    <i class="bi bi-hurricane"></i> AMS360
+                    <span class="brand-sub">Advanced Meteorological Systems</span>
+                </a>
+
+                <div class="d-none d-lg-flex align-items-center gap-1">
+                    <a href="/Weather/Index" class="nav-link nav-link-ams">
+                        <i class="fas fa-tachometer-alt"></i> Dashboard
+                    </a>
+                    <a href="/Weather/Detalhes?city=@city" class="nav-link nav-link-ams active">
+                        <i class="fas fa-chart-bar"></i> Detalhes
+                    </a>
+                    <a href="/Weather/PrevisaoCompleta?city=@city" class="nav-link nav-link-ams">
+                        <i class="fas fa-calendar-week"></i> Previsão 7 Dias
+                    </a>
+                    <a href="/Weather/Sobre" class="nav-link nav-link-ams">
+                        <i class="fas fa-info-circle"></i> Sobre
+                    </a>
+                </div>
+
+                <div class="d-flex align-items-center gap-2">
+                    <div class="search-wrapper d-none d-md-flex">
+                        <i class="bi bi-search search-icon"></i>
+                        <form action="/Weather/Index" method="get" style="display:flex; align-items:center; margin:0;">
+                            <input type="text" name="city" class="form-control search-input" placeholder="Buscar cidade..." value="@city" />
+                            <button type="submit" class="search-btn"><i class="bi bi-arrow-right"></i></button>
+                        </form>
+                    </div>
+                    <button class="navbar-toggler-ams d-lg-none" onclick="toggleMobileMenu()">
+                        <i class="bi bi-list"></i>
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- ===== MENU MOBILE ===== -->
+        <div class="navbar-collapse-ams" id="mobileMenu">
+            <button class="close-menu-btn" onclick="toggleMobileMenu()"><i class="bi bi-x-lg"></i></button>
+            <div class="search-mobile-wrapper">
+                <form action="/Weather/Index" method="get" style="display:flex; align-items:center; width:100%; position:relative;">
+                    <i class="bi bi-search search-icon" style="position:absolute; left:14px; color:rgba(255,255,255,0.3); z-index:3;"></i>
+                    <input type="text" name="city" class="form-control search-input" placeholder="Buscar cidade..." style="width:100%; padding:0.7rem 3.2rem 0.7rem 3.2rem; background:rgba(255,255,255,0.04); border-color:rgba(255,255,255,0.06); color:white; border-radius:40px;" value="@city" />
+                    <button type="submit" class="search-btn" style="position:absolute; right:4px; background:rgba(255,255,255,0.04); border:none; border-radius:40px; color:rgba(255,255,255,0.4); padding:0.35rem 1rem; z-index:3;"><i class="bi bi-arrow-right"></i></button>
+                </form>
+            </div>
+            <div class="menu-divider"></div>
+            <a href="/Weather/Index" class="nav-link nav-link-ams" onclick="toggleMobileMenu()"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+            <a href="/Weather/Detalhes?city=@city" class="nav-link nav-link-ams active" onclick="toggleMobileMenu()"><i class="fas fa-chart-bar"></i> Detalhes</a>
+            <a href="/Weather/PrevisaoCompleta?city=@city" class="nav-link nav-link-ams" onclick="toggleMobileMenu()"><i class="fas fa-calendar-week"></i> Previsão 7 Dias</a>
+            <a href="/Weather/Sobre" class="nav-link nav-link-ams" onclick="toggleMobileMenu()"><i class="fas fa-info-circle"></i> Sobre</a>
+            <div class="menu-divider"></div>
+            <div class="menu-footer">
+                <i class="bi bi-geo-alt-fill me-1"></i> @city, PT
+                <br>
+                <span style="opacity:0.4; font-size:0.7rem;">AMS360 · Advanced Meteorological Systems</span>
+            </div>
+        </div>
+
+        <!-- ===== CONTEÚDO PRINCIPAL ===== -->
+        <div id="detalhesContent">
+
+            <!-- ===== HEADER ===== -->
+            <div class="detalhes-header">
+                <div>
+                    <h3><i class="bi bi-bar-chart-steps"></i>Detalhes Meteorológicos</h3>
+                    <p class="text-soft-muted small mb-0">Análise completa das condições climáticas</p>
+                </div>
+                <div class="d-flex align-items-center gap-3">
+                    <span class="badge-city" id="cityBadge">
+                        <i class="bi bi-geo-alt me-1"></i> @city, PT
+                    </span>
+                    <a href="/Weather/Index?city=@city" class="btn-back">
+                        <i class="bi bi-arrow-left"></i> Voltar
+                    </a>
+                </div>
+            </div>
+
+            <!-- ===== STATS ===== -->
+            <div class="detalhes-stats" id="statsContainer">
+                <div class="detalhes-stat-card">
+                    <span class="stat-icon" style="color:#f9b84a;"><i class="bi bi-thermometer-half"></i></span>
+                    <div class="stat-value" id="statTemp">--°C</div>
+                    <div class="stat-label">Temperatura</div>
+                </div>
+                <div class="detalhes-stat-card">
+                    <span class="stat-icon" style="color:#7ad0ff;"><i class="bi bi-droplet"></i></span>
+                    <div class="stat-value" id="statHumidity">--%</div>
+                    <div class="stat-label">Humidade</div>
+                </div>
+                <div class="detalhes-stat-card">
+                    <span class="stat-icon" style="color:#93c5fd;"><i class="bi bi-wind"></i></span>
+                    <div class="stat-value" id="statWind">-- km/h</div>
+                    <div class="stat-label">Velocidade do Vento</div>
+                </div>
+                <div class="detalhes-stat-card">
+                    <span class="stat-icon" style="color:#6fc3df;"><i class="bi bi-speedometer2"></i></span>
+                    <div class="stat-value" id="statPressure">-- hPa</div>
+                    <div class="stat-label">Pressão Atmosférica</div>
+                </div>
+            </div>
+
+            <!-- ===== CLIMA ATUAL E RESUMO ===== -->
+            <div class="row g-4 mb-4">
+                <div class="col-lg-8">
+                    <div class="glass-card p-4">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h6 class="text-soft-white fw-semibold mb-0">
+                                <i class="bi bi-clock me-2" style="color:#7ad0ff;"></i>Previsão Horária
+                                <span class="text-soft-muted small fw-normal ms-2" id="currentHourDisplay">(Hora atual: --:--)</span>
+                            </h6>
+                            <span class="badge bg-light bg-opacity-10 text-white rounded-pill px-3 py-1">Próximas 24h</span>
+                        </div>
+                        <div class="hourly-scroll-wrapper">
+                            <div class="d-flex gap-2" id="hourlyForecastContainer">
+                                <!-- Gerado via JavaScript -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="resumo-card">
+                        <div class="resumo-temp">
+                            <i class="bi bi-sun-fill big-icon" id="resumoIcon" style="color:#ffd93d;"></i>
+                            <div>
+                                <div class="big-temp" id="resumoTemp">--°C</div>
+                                <div class="big-desc" id="resumoDesc">Carregando...</div>
+                            </div>
+                        </div>
+                        <div class="resumo-grid">
+                            <div class="resumo-item">
+                                <div class="label">Máxima</div>
+                                <div class="value high" id="resumoMax">--°C</div>
+                            </div>
+                            <div class="resumo-item">
+                                <div class="label">Mínima</div>
+                                <div class="value low" id="resumoMin">--°C</div>
+                            </div>
+                            <div class="resumo-item">
+                                <div class="label">Humidade</div>
+                                <div class="value humidity" id="resumoHumidity">--%</div>
+                            </div>
+                            <div class="resumo-item">
+                                <div class="label">Vento</div>
+                                <div class="value wind" id="resumoWind">-- km/h</div>
+                            </div>
+                        </div>
+                        <!-- ===== RESUMO DO DIA ===== -->
+                        <div class="resumo-sun">
+                            <div class="sun-item">
+                                <i class="bi bi-sunrise"></i>
+                                Nascer do sol
+                                <span class="time" id="sunrise">--:--</span>
+                            </div>
+                            <div class="sun-item">
+                                <i class="bi bi-sunset"></i>
+                                Pôr do sol
+                                <span class="time" id="sunset">--:--</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== GRÁFICOS ===== -->
+            <div class="row g-4 mb-4">
+                <div class="col-lg-7">
+                    <div class="glass-card p-4">
+                        <h6 class="text-soft-white fw-semibold mb-3">
+                            <i class="bi bi-thermometer-half me-2" style="color:#f9b84a;"></i>Evolução da Temperatura (5 Dias)
+                        </h6>
+                        <div class="detalhes-chart-container">
+                            <canvas id="tempChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="glass-card p-4">
+                        <h6 class="text-soft-white fw-semibold mb-3">
+                            <i class="bi bi-droplet me-2" style="color:#7ad0ff;"></i>Humidade vs Vento
+                        </h6>
+                        <div class="detalhes-chart-container">
+                            <canvas id="humidityChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== TABELA ===== -->
+            <div class="row g-4">
+                <div class="col-12">
+                    <div class="glass-card p-4">
+                        <h6 class="text-soft-white fw-semibold mb-3">
+                            <i class="bi bi-table me-2" style="color:#7ad0ff;"></i>Previsão Detalhada por Dia
+                        </h6>
+                        <div class="detalhes-table-wrapper">
+                            <table class="detalhes-table" id="detailsTable">
+                                <thead>
+                                    <tr>
+                                        <th>Dia</th>
+                                        <th>Clima</th>
+                                        <th>Máx</th>
+                                        <th>Mín</th>
+                                        <th>Humidade</th>
+                                        <th>Vento</th>
+                                        <th>Pressão</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tableBody">
+                                    <!-- Gerado via JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- ===== LOADING ===== -->
+        <div id="loadingIndicator" style="display:none; justify-content:center; align-items:center; min-height:400px;">
+            <div class="text-center">
+                <div class="spinner-border text-primary" role="status" style="width:3rem;height:3rem;">
+                    <span class="visually-hidden">Carregando...</span>
+                </div>
+                <p class="text-soft-muted mt-3">Carregando dados meteorológicos...</p>
+            </div>
+        </div>
+
+        <!-- ===== FOOTER ===== -->
+        <div class="row mt-4">
+            <div class="col-12">
+                <div class="footer-ams d-flex flex-wrap justify-content-between align-items-center">
+                    <span>
+                        <i class="bi bi-cloud-sun me-1"></i>
+                        Dados fornecidos por OpenWeather API &bull; &copy; 2026 AMS360 — Advanced Meteorological Systems
+                    </span>
+                    <span>
+                        <i class="bi bi-clock me-1"></i>
+                        Atualizado em <span id="updateTime">@DateTime.Now.ToString("dd/MM/yyyy, HH:mm:ss")</span>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- ===== SCRIPTS ===== -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+<script src="~/js/Detalhes.js" asp-append-version="true"></script>
+
+</body>
+</html>

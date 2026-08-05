@@ -1,0 +1,146 @@
+﻿@model AMS360.Models.ErrorViewModel
+@{
+    ViewData["Title"] = "AMS360 | Erro";
+}
+
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AMS360 | Erro Meteorológico</title>
+
+    <!-- Bootstrap 5 + Icons + Font -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz@14..32&display=swap" rel="stylesheet">
+
+    <!-- ===== FAVICONS ===== -->
+    <!-- Favicon principal (SVG) -->
+    <link rel="icon" type="image/svg+xml" href="~/images/logo/favicon.svg">
+    
+    <!-- Favicon PNG para navegadores antigos -->
+    <link rel="icon" type="image/png" sizes="32x32" href="~/images/logo/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="~/images/logo/favicon-16x16.png">
+    
+    <!-- Apple Touch Icon (iOS / iPadOS) -->
+    <link rel="apple-touch-icon" sizes="180x180" href="~/images/logo/apple-touch-icon.png">
+    
+    <!-- Android Chrome -->
+    <link rel="manifest" href="~/images/logo/site.webmanifest">
+    
+    <!-- Windows 8/10 -->
+    <meta name="msapplication-TileColor" content="#0b1a2f">
+    <meta name="msapplication-TileImage" content="~/images/logo/mstile-150x150.png">
+
+    <!-- Site CSS -->
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true">
+    <link rel="stylesheet" href="~/css/erros.css" asp-append-version="true">
+</head>
+<body>
+
+<div class="error-weather-wrapper">
+    <div class="error-weather-card">
+
+        <!-- ===== ÍCONE ===== -->
+        @if (Model?.StatusCode == 404 || Model?.ErrorMessage?.Contains("não encontrada") == true)
+        {
+            <span class="weather-error-icon icon-404"><i class="bi bi-cloud-rain-fill"></i></span>
+            <h1 class="weather-error-title">Cidade Não Encontrada</h1>
+            <p class="weather-error-message">
+                @(Model?.ErrorMessage ?? "A cidade que você pesquisou não foi encontrada em nosso sistema.")
+                <br>
+                <span style="font-size: 0.85rem; color: rgba(255,255,255,0.35);">
+                    Verifique o nome da cidade e tente novamente.
+                </span>
+            </p>
+        }
+        else if (Model?.StatusCode == 500)
+        {
+            <span class="weather-error-icon icon-server"><i class="bi bi-hurricane"></i></span>
+            <h1 class="weather-error-title">Erro no Servidor</h1>
+            <p class="weather-error-message">
+                Ocorreu um erro ao buscar os dados meteorológicos.
+                <br>
+                <span style="font-size: 0.85rem; color: rgba(255,255,255,0.35);">
+                    Nossa equipe já foi notificada.
+                </span>
+            </p>
+        }
+        else
+        {
+            <span class="weather-error-icon icon-error"><i class="bi bi-cloud-slash-fill"></i></span>
+            <h1 class="weather-error-title">Erro Meteorológico</h1>
+            <p class="weather-error-message">
+                @(Model?.ErrorMessage ?? "Ocorreu um erro ao buscar os dados meteorológicos.")
+                <br>
+                <span style="font-size: 0.85rem; color: rgba(255,255,255,0.35);">
+                    Nossa equipe já foi notificada.
+                </span>
+            </p>
+        }
+
+        <!-- ===== SUGESTÕES ===== -->
+        <div class="weather-error-suggestions">
+            <div class="suggestion-item">
+                <i class="bi bi-geo-alt"></i>
+                <span>Verifique se o nome da cidade está escrito corretamente</span>
+            </div>
+            <div class="suggestion-item">
+                <i class="bi bi-search"></i>
+                <span>Tente pesquisar por uma cidade diferente</span>
+            </div>
+            <div class="suggestion-item">
+                <i class="bi bi-arrow-clockwise"></i>
+                <span>Recarregue a página e tente novamente</span>
+            </div>
+            @if (Model?.StatusCode == 404 || Model?.ErrorMessage?.Contains("não encontrada") == true)
+            {
+                <div class="suggestion-item">
+                    <i class="bi bi-lightbulb"></i>
+                    <span>Tente usar o nome em inglês (ex: Lisbon, London, Paris)</span>
+                </div>
+            }
+        </div>
+
+        <!-- ===== CIDADES SUGERIDAS ===== -->
+        <p style="color: rgba(255,255,255,0.3); font-size: 0.8rem; margin-bottom: 0.8rem;">
+            <i class="bi bi-star me-1"></i> Cidades populares:
+        </p>
+        <div class="error-cities-grid">
+            <a href="/Weather/Index?city=Lisbon" class="error-city-tag">🇵🇹 Lisbon</a>
+            <a href="/Weather/Index?city=Porto" class="error-city-tag">🇵🇹 Porto</a>
+            <a href="/Weather/Index?city=London" class="error-city-tag">🇬🇧 London</a>
+            <a href="/Weather/Index?city=Paris" class="error-city-tag">🇫🇷 Paris</a>
+            <a href="/Weather/Index?city=Madrid" class="error-city-tag">🇪🇸 Madrid</a>
+            <a href="/Weather/Index?city=Rome" class="error-city-tag">🇮🇹 Rome</a>
+            <a href="/Weather/Index?city=Berlin" class="error-city-tag">🇩🇪 Berlin</a>
+            <a href="/Weather/Index?city=Sao Paulo" class="error-city-tag">🇧🇷 São Paulo</a>
+            <a href="/Weather/Index?city=Luanda" class="error-city-tag">🇦🇴 Luanda</a>
+            <a href="/Weather/Index?city=Maputo" class="error-city-tag">🇲🇿 Maputo</a>
+            <a href="/Weather/Index?city=Praia" class="error-city-tag">🇨🇻 Praia</a>
+            <a href="/Weather/Index?city=New York" class="error-city-tag">🇺🇸 New York</a>
+        </div>
+
+        <!-- ===== BOTÃO ===== -->
+        <div style="margin-top: 1.5rem;">
+            <a href="/" class="btn-weather-error">
+                <i class="bi bi-house-fill"></i> Voltar ao Início
+            </a>
+        </div>
+
+        <!-- ===== FOOTER ===== -->
+        <div class="error-weather-footer">
+            <i class="bi bi-cloud-sun me-1"></i>
+            AMS360 — Advanced Meteorological Systems
+            <br>
+            <span style="font-size: 0.6rem; opacity: 0.6;">
+                &copy; 2026 · Dados fornecidos por OpenWeather API
+            </span>
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>

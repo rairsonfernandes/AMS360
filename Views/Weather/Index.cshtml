@@ -1,0 +1,418 @@
+﻿﻿@using AMS360.Models
+@model WeatherViewModel
+@{
+    ViewData["Title"] = "AMS360 | Dashboard Principal";
+    var current = Model?.CurrentWeather;
+    var forecast = Model?.Forecast?.Forecast ?? new List<DailyForecast>();
+}
+
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+
+    <!-- Bootstrap 5 + Icons + Font -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz@14..32&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+    <!-- ===== FAVICONS ===== -->
+    <link rel="icon" type="image/svg+xml" href="~/images/logo/favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="~/images/logo/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="~/images/logo/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="~/images/logo/apple-touch-icon.png">
+    <link rel="manifest" href="~/images/logo/site.webmanifest">
+    <meta name="msapplication-TileColor" content="#0b1a2f">
+    <meta name="msapplication-TileImage" content="~/images/logo/mstile-150x150.png">
+
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true">
+</head>
+<body>
+
+<div class="dashboard-wrapper">
+    <div class="dashboard-bg">
+
+        <!-- ======================================== -->
+        <!-- NAVBAR -->
+        <!-- ======================================== -->
+        <nav class="navbar navbar-ams">
+            <div class="container-fluid px-0">
+                <a class="navbar-brand" href="/Weather/Index">
+                    <i class="bi bi-hurricane"></i> AMS360
+                    <span class="brand-sub">Advanced Meteorological Systems</span>
+                </a>
+
+                <div class="d-none d-lg-flex align-items-center gap-1">
+                    <a href="/Weather/Index" class="nav-link nav-link-ams active">
+                        <i class="fas fa-tachometer-alt"></i> Dashboard
+                    </a>
+                    <a href="/Weather/Detalhes?city=@Model?.City" class="nav-link nav-link-ams">
+                        <i class="fas fa-chart-bar"></i> Detalhes
+                    </a>
+                    <a href="/Weather/PrevisaoCompleta?city=@Model?.City" class="nav-link nav-link-ams">
+                        <i class="fas fa-calendar-week"></i> Previsão 7 Dias
+                    </a>
+                    <a href="/Weather/Sobre" class="nav-link nav-link-ams">
+                        <i class="fas fa-info-circle"></i> Sobre
+                    </a>
+                </div>
+
+                <div class="d-flex align-items-center gap-2">
+                    <div class="search-wrapper d-none d-md-flex">
+                        <i class="bi bi-search search-icon"></i>
+                        <input type="text" class="form-control search-input" placeholder="Buscar cidade..." id="searchInputDesktop" list="cidadesList">
+                        <datalist id="cidadesList"></datalist>
+                        <button class="search-btn" onclick="buscarCidadeDesktop()">
+                            <i class="bi bi-arrow-right"></i>
+                        </button>
+                    </div>
+                    <button class="navbar-toggler-ams d-lg-none" onclick="toggleMobileMenu()">
+                        <i class="bi bi-list"></i>
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- ======================================== -->
+        <!-- MENU MOBILE -->
+        <!-- ======================================== -->
+        <div class="navbar-collapse-ams" id="mobileMenu">
+            <button class="close-menu-btn" onclick="toggleMobileMenu()">
+                <i class="bi bi-x-lg"></i>
+            </button>
+            <div class="search-mobile-wrapper">
+                <div class="search-wrapper">
+                    <i class="bi bi-search search-icon"></i>
+                    <input type="text" class="form-control search-input" placeholder="Buscar cidade..." id="searchInputMobile">
+                    <button class="search-btn" onclick="buscarCidadeMobile()">
+                        <i class="bi bi-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="menu-divider"></div>
+            <a href="/Weather/Index" class="nav-link nav-link-ams active" onclick="toggleMobileMenu()">
+                <i class="fas fa-tachometer-alt"></i> Dashboard
+            </a>
+            <a href="/Weather/Detalhes?city=@Model?.City" class="nav-link nav-link-ams" onclick="toggleMobileMenu()">
+                <i class="fas fa-chart-bar"></i> Detalhes
+            </a>
+            <a href="/Weather/PrevisaoCompleta?city=@Model?.City" class="nav-link nav-link-ams" onclick="toggleMobileMenu()">
+                <i class="fas fa-calendar-week"></i> Previsão 7 Dias
+            </a>
+            <a href="/Weather/Sobre" class="nav-link nav-link-ams" onclick="toggleMobileMenu()">
+                <i class="fas fa-info-circle"></i> Sobre
+            </a>
+            <div class="menu-divider"></div>
+            <div class="menu-footer">
+                <i class="bi bi-geo-alt-fill me-1"></i> <span id="mobileCityName">@Model?.City, PT</span>
+                <br>
+                <span style="opacity:0.4; font-size:0.7rem;">AMS360 · Advanced Meteorological Systems</span>
+            </div>
+        </div>
+
+        <!-- ======================================== -->
+        <!-- MAIN DASHBOARD -->
+        <!-- ======================================== -->
+        <div class="row g-4 mt-2">
+
+            <!-- ======================================== -->
+            <!-- COLUNA ESQUERDA -->
+            <!-- ======================================== -->
+            <div class="col-lg-5 col-xl-4">
+                <div class="glass-card p-4 h-100 d-flex flex-column">
+
+                    <!-- Clima Atual -->
+                    <div class="d-flex align-items-start justify-content-between">
+                        <div>
+                            <span class="badge bg-light bg-opacity-10 text-white px-3 py-2 rounded-pill mb-2" id="cityBadge">
+                                <i class="bi bi-geo-alt me-1"></i> @Model?.City, @current?.Country
+                            </span>
+                            <h2 class="display-4 fw-semibold text-soft-white text-glow" id="currentTemp">
+                                @(current?.Temperature.ToString("0") ?? "--")°C
+                            </h2>
+                            <div class="d-flex align-items-center gap-2 mt-1">
+                                <!-- Ícone do clima - DINÂMICO via JavaScript -->
+                                <i class="bi bi-sun-fill weather-icon-big" id="weatherIcon" style="color:#ffd93d;"></i>
+                                <div>
+                                    <p class="mb-0 text-soft-white fw-semibold fs-5" id="weatherDesc">
+                                        @(current?.Description ?? "Carregando...")
+                                    </p>
+                                    <p class="mb-0 text-soft-muted small" id="feelsLike">
+                                        Sensação @(current?.Temperature != null ? $"{(current.Temperature - 1):N0}°C" : "--")
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-end">
+                            <div class="bg-white bg-opacity-10 px-3 py-2 rounded-4">
+                                <i class="bi bi-droplet me-1" style="color:#7ad0ff;"></i>
+                                <span class="text-soft-white" id="humidity">@(current?.Humidity.ToString("0") ?? "--")%</span>
+                            </div>
+                            <div class="mt-2 text-soft-muted small">
+                                <i class="bi bi-wind me-1"></i>
+                                <span class="text-soft-white" id="windSpeed">@(current?.WindSpeed.ToString("0.0") ?? "--")</span> km/h
+                            </div>
+                            <div class="text-soft-muted small">
+                                <i class="bi bi-speedometer2 me-1"></i>
+                                <span class="text-soft-white" id="pressure">@(current?.Pressure.ToString("0") ?? "--")</span> hPa
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Previsão 5 Dias -->
+                    <div class="mt-4">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h6 class="text-soft-white fw-semibold mb-0">
+                                <i class="bi bi-calendar3 me-2" style="color:#7ad0ff;"></i>Previsão 5 Dias
+                            </h6>
+                            <a href="/Weather/Detalhes?city=@Model?.City" class="btn-action">
+                                <i class="bi bi-arrow-right"></i> Detalhes
+                            </a>
+                        </div>
+                        <div class="row g-2" id="fiveDayForecast">
+                            @if (forecast != null && forecast.Any())
+                            {
+                                var first5 = forecast.Take(5).ToList();
+                                for (int i = 0; i < first5.Count; i++)
+                                {
+                                    var day = first5[i];
+                                    // O JavaScript vai substituir os ícones dinamicamente
+                                    // Mantemos um placeholder que será atualizado
+                                    <div class="col" data-date="@day.Date.ToString("yyyy-MM-dd")">
+                                        <a href="/Weather/Detalhes?city=@Model?.City&date=@day.Date.ToString("yyyy-MM-dd")"
+                                           class="forecast-card-clickable">
+                                            <div class="day-name">@day.Date.ToString("ddd")</div>
+                                            <i class="bi bi-sun-fill day-icon" style="color:#ffd93d; font-size:2rem;" 
+                                               data-icon-placeholder="true"></i>
+                                            <div class="day-temp-max">
+                                                @day.Temperature.ToString("0")°
+                                                <span class="day-temp-min">@day.TemperatureMin.ToString("0")°</span>
+                                            </div>
+                                            <div class="day-divider"></div>
+                                            <div class="day-desc">@(day.Description ?? "Céu limpo")</div>
+                                            <div class="click-hint"><i class="bi bi-arrow-right-circle"></i> Detalhes</div>
+                                        </a>
+                                    </div>
+                                }
+                            }
+                            else
+                            {
+                                <div class="col-12 text-center text-soft-muted" id="forecastPlaceholder">
+                                    <i class="bi bi-cloud-slash fs-2 d-block mb-2"></i>
+                                    Carregando previsão...
+                                </div>
+                            }
+                        </div>
+                    </div>
+
+                    <!-- Análise de Temperaturas -->
+                    <div class="mt-3 pt-3 border-top border-soft">
+                        <h6 class="text-soft-white fw-semibold mb-3">
+                            <i class="bi bi-graph-up-arrow me-2" style="color:#7ad0ff;"></i>Análise de Temperaturas
+                        </h6>
+                        <div class="row g-2">
+                            <div class="col-4">
+                                <div class="glass-card-light p-2 text-center">
+                                    <span class="stat-label">Mais quente</span>
+                                    <div class="text-soft-white fw-bold fs-5" style="color:#f9b84a;" id="hottestDay">
+                                        @(forecast != null && forecast.Any() ? $"{forecast.OrderByDescending(x => x.TemperatureMax).First().TemperatureMax:N0}°" : "--")
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="glass-card-light p-2 text-center">
+                                    <span class="stat-label">Mais frio</span>
+                                    <div class="text-soft-white fw-bold fs-5" style="color:#7ad0ff;" id="coldestDay">
+                                        @(forecast != null && forecast.Any() ? $"{forecast.OrderBy(x => x.TemperatureMin).First().TemperatureMin:N0}°" : "--")
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="glass-card-light p-2 text-center">
+                                    <span class="stat-label">Média</span>
+                                    <div class="text-soft-white fw-bold fs-5" style="color:#93c5fd;" id="avgTemp">
+                                        @(forecast != null && forecast.Any() ? $"{forecast.Average(x => x.Temperature):N1}°C" : "--")
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ======================================== -->
+            <!-- COLUNA DIREITA -->
+            <!-- ======================================== -->
+            <div class="col-lg-7 col-xl-8">
+                <div class="glass-card p-4 h-100 d-flex flex-column">
+
+                    <!-- Mapa -->
+                    <div>
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h6 class="text-soft-white fw-semibold">
+                                <i class="bi bi-map me-2" style="color:#7ad0ff;"></i>Mapa de Temperaturas
+                            </h6>
+                            <span class="badge bg-light bg-opacity-10 text-white rounded-pill px-3 py-1">
+                                <i class="bi bi-geo-alt me-1"></i>
+                                <span class="text-soft-white" id="mapCityName">@Model?.City</span>
+                            </span>
+                        </div>
+                        <div id="mapContainer">
+                            <div class="map-legend">
+                                <div class="legend-title">Temperatura</div>
+                                <div class="legend-item">
+                                    <div class="legend-color" style="background: #ff6b6b;"></div>
+                                    <span>≥ 25°C</span>
+                                </div>
+                                <div class="legend-item">
+                                    <div class="legend-color" style="background: #f9b84a;"></div>
+                                    <span>20°C - 24°C</span>
+                                </div>
+                                <div class="legend-item">
+                                    <div class="legend-color" style="background: #7ad0ff;"></div>
+                                    <span>15°C - 19°C</span>
+                                </div>
+                                <div class="legend-item">
+                                    <div class="legend-color" style="background: #4a9eff;"></div>
+                                    <span>≤ 14°C</span>
+                                </div>
+                            </div>
+                            <button class="map-fullscreen-btn" onclick="toggleMapFullscreen()">
+                                <i class="bi bi-arrows-fullscreen"></i> Tela cheia
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Gráfico de Barras -->
+                    <div class="mt-4">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h6 class="text-soft-white fw-semibold">
+                                <i class="bi bi-bar-chart-fill me-2" style="color:#7ad0ff;"></i>Variação térmica
+                            </h6>
+                            <a href="/Weather/Detalhes?city=@Model?.City" class="btn-action">
+                                <i class="bi bi-arrow-right"></i> Detalhes
+                            </a>
+                        </div>
+                        <div class="bar-chart" id="barChart">
+                            @if (forecast != null && forecast.Any())
+                            {
+                                var temps = forecast.Take(5).Select(x => x.Temperature).ToList();
+                                var maxTemp = temps.Any() ? temps.Max() : 30;
+                                var minTemp = temps.Any() ? temps.Min() : 10;
+                                var range = maxTemp - minTemp > 1 ? maxTemp - minTemp : 10;
+                                var days = forecast.Take(5).ToList();
+
+                                for (int i = 0; i < days.Count; i++)
+                                {
+                                    var height = ((days[i].Temperature - minTemp) / range) * 70 + 20;
+                                    var temp = days[i].Temperature;
+                                    var barColor = "#7ad0ff";
+                                    if (temp >= 25) barColor = "#ff6b6b";
+                                    else if (temp >= 20) barColor = "#f9b84a";
+                                    else if (temp >= 15) barColor = "#7ad0ff";
+                                    else barColor = "#4a9eff";
+                                    
+                                    <div class="bar-item">
+                                        <div class="bar" style="height:@(height)px; background:@barColor;"></div>
+                                        <div class="bar-temp">@days[i].Temperature.ToString("0")°</div>
+                                        <div class="bar-label">@days[i].Date.ToString("ddd")</div>
+                                    </div>
+                                }
+                            }
+                            else
+                            {
+                                <div class="bar-item"><div class="bar" style="height:75px;"></div><div class="bar-temp">22°</div><div class="bar-label">Qua</div></div>
+                                <div class="bar-item"><div class="bar" style="height:55px;"></div><div class="bar-temp">19°</div><div class="bar-label">Qui</div></div>
+                                <div class="bar-item"><div class="bar" style="height:40px;"></div><div class="bar-temp">17°</div><div class="bar-label">Sex</div></div>
+                                <div class="bar-item"><div class="bar" style="height:65px;"></div><div class="bar-temp">21°</div><div class="bar-label">Sáb</div></div>
+                                <div class="bar-item"><div class="bar" style="height:85px;"></div><div class="bar-temp">23°</div><div class="bar-label">Dom</div></div>
+                            }
+                        </div>
+                    </div>
+
+                    <!-- Mini Stats -->
+                    <div class="row g-3 mt-2">
+                        <div class="col-4">
+                            <a href="/Weather/Detalhes?city=@Model?.City" class="text-decoration-none">
+                                <div class="glass-card-light p-3 text-center" style="transition:0.3s;cursor:pointer;">
+                                    <i class="bi bi-thermometer-sun fs-3" style="color:#f9b84a;"></i>
+                                    <div>
+                                        <span class="stat-label">Máxima</span>
+                                        <div class="stat-value" style="font-size:1.2rem;" id="maxTempDisplay">
+                                            @(current?.TemperatureMax.ToString("0") ?? "--")°C
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-4">
+                            <a href="/Weather/Detalhes?city=@Model?.City" class="text-decoration-none">
+                                <div class="glass-card-light p-3 text-center" style="transition:0.3s;cursor:pointer;">
+                                    <i class="bi bi-thermometer-snow fs-3" style="color:#7ad0ff;"></i>
+                                    <div>
+                                        <span class="stat-label">Mínima</span>
+                                        <div class="stat-value" style="font-size:1.2rem;" id="minTempDisplay">
+                                            @(current?.TemperatureMin.ToString("0") ?? "--")°C
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-4">
+                            <a href="/Weather/Detalhes?city=@Model?.City" class="text-decoration-none">
+                                <div class="glass-card-light p-3 text-center" style="transition:0.3s;cursor:pointer;">
+                                    <i class="bi bi-moisture fs-3" style="color:#6fc3df;"></i>
+                                    <div>
+                                        <span class="stat-label">Humidade</span>
+                                        <div class="stat-value" style="font-size:1.2rem;" id="humidityDisplay">
+                                            @(current?.Humidity.ToString("0") ?? "--")%
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- ======================================== -->
+        <!-- FOOTER -->
+        <!-- ======================================== -->
+        <div class="row mt-3">
+            <div class="col-12">
+                <div class="footer-ams d-flex flex-wrap justify-content-between align-items-center">
+                    <span>
+                        <i class="bi bi-cloud-sun me-1"></i>
+                        Dados fornecidos por OpenWeather API &bull; &copy; 2026 AMS360 — Advanced Meteorological Systems
+                    </span>
+                    <span>
+                        <i class="bi bi-clock me-1"></i>
+                        Atualizado em
+                        <span id="updateTime">@DateTime.Now.ToString("dd/MM/yyyy, HH:mm:ss")</span>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- ======================================== -->
+<!-- SCRIPTS -->
+<!-- ======================================== -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+
+</body>
+</html>

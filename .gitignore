@@ -1,0 +1,195 @@
+﻿# ========================================
+# .gitignore para AMS360 - ASP.NET Core
+# ========================================
+
+# ===== .NET / ASP.NET Core =====
+bin/
+obj/
+publish/
+logs/
+*.user
+*.suo
+*.cache
+*.pidb
+*.log
+*.tmp
+*.nupkg
+*.nuspec
+*.sln.ide
+.vs/
+.vscode/
+packages/
+
+# ===== User Secrets (CHAVES API) =====
+secrets.json
+**/secrets.json
+*.secrets.json
+!secrets.example.json
+
+# ===== Configurações sensíveis =====
+appsettings.Production.json
+appsettings.*.json
+!appsettings.Example.json
+!appsettings.Development.json
+
+# ===== Chaves e certificados =====
+*.key
+*.pem
+*.crt
+*.pfx
+*.p12
+*.snk
+*.cer
+*.privatekey
+
+# ===== Visual Studio =====
+*.swp
+*.*~
+project.lock.json
+.DS_Store
+*.pyc
+nupkg/
+artifacts/
+
+# ===== Build =====
+*.exe
+*.dll
+*.pdb
+*.psess
+*.vsp
+*.psess
+*.vspx
+*.nupkg
+
+# ===== Test Results =====
+TestResults/
+coverage/
+*.coverage
+*.trx
+*.testresult
+
+# ===== Environment files =====
+.env
+.env.*
+!.env.example
+
+# ===== IDE =====
+.idea/
+*.sln.iml
+*.code-workspace
+*.suo
+*.ntvs*
+*.njsproj
+*.sln.ide
+.vs/
+.vscode/
+
+# ===== Node (se usado) =====
+node_modules/
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+package-lock.json
+yarn.lock
+
+# ===== Misc =====
+*.orig
+*.old
+*.bak
+*.tmp
+*.temp
+*.swp
+*~
+*.pid
+*.seed
+*.pid.lock
+
+# ===== Windows =====
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# ===== Mac =====
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# ===== Linux =====
+.directory
+*.swp
+*~
+
+# ===== Logs =====
+**/logs/
+*.log
+*.txt
+
+# ===== Publish =====
+publish/
+*.deploy
+*.deploy.cmd
+*.deploy.ps1
+*.deploy.xml
+
+# ===== Azure =====
+*.azureprofile
+*.azureconfig
+*.user
+*.pubxml.user
+
+# ===== Docker =====
+*.dockerignore
+docker-compose.override.yml
+
+# ===== GitHub =====
+.github/
+*.github
+
+# ===== Application Insights =====
+ApplicationInsights.config
+*_snapshot_*.json
+
+# ===== OpenCover =====
+*.opencover.xml
+*.coverlet.xml
+
+# ===== Benchmark =====
+*.benchmark.json
+*.benchmark.*.html
+
+# ===== SourceLink =====
+*.srclink
+
+# ===== Compressed =====
+*.7z
+*.zip
+*.tar.gz
+*.rar
+
+# ===== Database =====
+*.mdf
+*.ldf
+*.db
+*.sqlite
+*.sqlite-journal
+
+# ===== Backup =====
+*.bak
+*.backup
+*.old
+*.orig
+
+# ===== Temporary files =====
+*~
+*.tmp
+*.temp
+*.cache
+*.pid
+*.seed
+*.pid.lock
