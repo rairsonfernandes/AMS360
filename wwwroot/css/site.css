@@ -1147,3 +1147,120 @@ body {
     .value-card { padding: 1rem 0.5rem; }
     .value-card .value-icon { font-size: 2rem; }
 }
+
+
+
+/* ========================================
+   PÁGINA SOBRE - ESTILOS FALTANTES
+   ======================================== */
+
+/* ===== BOTÃO VOLTAR ===== */
+.btn-back {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    color: rgba(255, 255, 255, 0.7);
+    border-radius: 40px;
+    padding: 0.4rem 1.2rem;
+    transition: 0.3s;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.85rem;
+}
+
+.btn-back:hover {
+    background: rgba(122, 208, 255, 0.08);
+    border-color: rgba(122, 208, 255, 0.2);
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* ===== TECH BADGES (OpenWeather API, ASP.NET Core, etc) ===== */
+.tech-badge {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    padding: 0.5rem 1.2rem;
+    border-radius: 40px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 0.85rem;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.tech-badge:hover {
+    background: rgba(122, 208, 255, 0.08);
+    border-color: rgba(122, 208, 255, 0.2);
+    transform: translateY(-2px);
+    color: white;
+}
+
+.tech-badge i {
+    color: #7ad0ff;
+    font-size: 1rem;
+}
+
+/* ===== VALUE BADGES (Transparência, Tempo Real, etc) ===== */
+/* Esses usam a mesma classe tech-badge, mas vamos garantir */
+.tech-badge i.bi-eye-fill {
+    color: #93c5fd;
+}
+
+.tech-badge i.bi-clock-fill {
+    color: #f9b84a;
+}
+
+.tech-badge i.bi-shield-fill {
+    color: #7ad0ff;
+}
+
+.tech-badge i.bi-graph-up-arrow {
+    color: #6fc3df;
+}
+
+/* ===== RESPONSIVE PARA BADGES ===== */
+@media (max-width: 576px) {
+    .tech-badge {
+        font-size: 0.7rem;
+        padding: 0.3rem 0.8rem;
+    }
+}
+
+/* ========================================
+   CORREÇÕES ADICIONAIS
+   ======================================== */
+
+/* Garantir que os ícones dentro dos badges fiquem alinhados */
+.tech-badge i {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Estilo para os badges de valores (Transparência, etc) */
+.value-badge {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    padding: 0.5rem 1.2rem;
+    border-radius: 40px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 0.85rem;
+    transition: all 0.3s ease;
+}
+
+.value-badge:hover {
+    background: rgba(255, 255, 255, 0.08);
+    transform: translateY(-2px);
+}
+
+/* Cores específicas para cada badge de valor */
+.value-badge.transparencia i { color: #93c5fd; }
+.value-badge.tempo-real i { color: #f9b84a; }
+.value-badge.confiabilidade i { color: #7ad0ff; }
+.value-badge.inovacao i { color: #6fc3df; }
