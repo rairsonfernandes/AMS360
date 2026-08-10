@@ -83,69 +83,173 @@
 
 ## 📦 Estrutura do Projeto
 
+## 📁 Estrutura do Projeto
+
+```text
 AMS360/
-├── Controllers/ # Controladores MVC
-│ └── WeatherController.cs # Lógica das requisições
-├── Models/ # Modelos de dados
-│ ├── WeatherResponse.cs # Resposta da API
-│ ├── WeatherViewModel.cs # ViewModel para Views
-│ └── ErrorViewModel.cs # Modelo de erro
-├── Services/ # Serviços de negócio
-│ ├── IWeatherService.cs # Interface do serviço
-│ ├── WeatherService.cs # Consumo da API OpenWeather
-│ └── WeatherHealthCheck.cs # Health Check
-├── Views/ # Views Razor
-│ └── Weather/
-│ ├── Index.cshtml # Dashboard principal
-│ ├── Detalhes.cshtml # Detalhes do dia
-│ ├── PrevisaoCompleta.cshtml # Previsão 7 dias
-│ └── Sobre.cshtml # Página sobre
-├── wwwroot/ # Arquivos estáticos
-│ ├── css/
-│ │ ├── site.css # Estilos globais
-│ │ ├── Detalhes.css # Estilos da página detalhes
-│ │ └── PrevisaoCompleta.css # Estilos da previsão
-│ └── js/
-│ ├── site.js # JavaScript principal
-│ ├── Detalhes.js # JS da página detalhes
-│ └── PrevisaoCompleta.js # JS da previsão
-├── .github/workflows/
-│ └── deploy.yml # CI/CD com GitHub Actions
-├── Program.cs # Ponto de entrada
-├── appsettings.json # Configurações
-├── Dockerfile # Containerização
-├── docker-compose.yml # Orquestração de containers
-├── README.md # Documentação
-└── LICENSE.md # Licença
+│
+├── Controllers/
+│   └── WeatherController.cs
+│       └── Controlador responsável pelas requisições relacionadas ao clima
+│
+├── Models/
+│   ├── WeatherResponse.cs
+│   │   └── Modelo da resposta recebida da API
+│   ├── WeatherViewModel.cs
+│   │   └── ViewModel utilizado pelas Views
+│   └── ErrorViewModel.cs
+│       └── Modelo utilizado para tratamento de erros
+│
+├── Services/
+│   ├── IWeatherService.cs
+│   │   └── Interface do serviço de clima
+│   ├── WeatherService.cs
+│   │   └── Serviço responsável pelo consumo da API OpenWeather
+│   └── WeatherHealthCheck.cs
+│       └── Health Check da aplicação e do serviço de clima
+│
+├── Views/
+│   └── Weather/
+│       ├── Index.cshtml
+│       │   └── Dashboard principal
+│       ├── Detalhes.cshtml
+│       │   └── Detalhes da previsão do dia
+│       ├── PrevisaoCompleta.cshtml
+│       │   └── Previsão completa para os próximos 7 dias
+│       └── Sobre.cshtml
+│           └── Página com informações sobre o projeto
+│
+├── wwwroot/
+│   ├── css/
+│   │   ├── site.css
+│   │   │   └── Estilos globais
+│   │   ├── Detalhes.css
+│   │   │   └── Estilos da página de detalhes
+│   │   └── PrevisaoCompleta.css
+│   │       └── Estilos da previsão completa
+│   │
+│   └── js/
+│       ├── site.js
+│       │   └── JavaScript principal
+│       ├── Detalhes.js
+│       │   └── JavaScript da página de detalhes
+│       └── PrevisaoCompleta.js
+│           └── JavaScript da previsão completa
+│
+├── .github/
+│   └── workflows/
+│       └── deploy.yml
+│           └── Pipeline de CI/CD com GitHub Actions
+│
+├── Program.cs
+│   └── Ponto de entrada e configuração da aplicação
+│
+├── appsettings.json
+│   └── Configurações da aplicação
+│
+├── Dockerfile
+│   └── Configuração para criação da imagem Docker
+│
+├── docker-compose.yml
+│   └── Orquestração dos containers
+│
+├── README.md
+│   └── Documentação do projeto
+│
+└── LICENSE.md
+    └── Licença do projeto
+```
+
+### 🏗️ Arquitetura
+
+O projeto **AMS360** utiliza o padrão **MVC (Model-View-Controller)**, com uma camada adicional de **Services** para separar as regras de negócio e a comunicação com a API externa.
+
+* **Controllers** → Gerenciam as requisições e respostas da aplicação.
+* **Models** → Representam os dados utilizados pela aplicação.
+* **Services** → Contêm a lógica de negócio e integração com a API de clima.
+* **Views** → Interface gráfica desenvolvida com Razor.
+* **wwwroot** → Contém arquivos estáticos como CSS e JavaScript.
+* **Docker** → Responsável pela containerização da aplicação.
+* **GitHub Actions** → Automatiza o processo de build, testes e deploy.
 
 
-### Arquitetura MVC
 
-O projeto segue o padrão **MVC (Model-View-Controller)**:
-┌─────────────────────────────────────────────────────────────┐
-│ Cliente (Browser) │
-└─────────────────────────────────────────────────────────────┘
-│
-▼
-┌─────────────────────────────────────────────────────────────┐
-│ WeatherController                                           │
-│ ┌─────────────────────────────────────────────────────┐     │
-│ │ Index() │ Detalhes() │ PrevisaoCompleta()           │     │
-│ └─────────────────────────────────────────────────────┘     │
-└─────────────────────────────────────────────────────────────┘
-│
-▼
-┌─────────────────────────────────────────────────────────────┐
-│ WeatherService                                              │
-│ ┌─────────────────────────────────────────────────────┐     │
-│ │ GetCurrentWeatherAsync() GetWeatherForecastAsync    │     │
-│ └─────────────────────────────────────────────────────┘     │
-└─────────────────────────────────────────────────────────────┘
-│
-▼
-┌─────────────────────────────────────────────────────────────┐
-│ OpenWeather API                                             │
-└─────────────────────────────────────────────────────────────┘
+### 🏗️ Arquitetura MVC
+
+O projeto **AMS360** segue o padrão arquitetural **MVC (Model-View-Controller)**, utilizando uma camada de serviços para separar a lógica de negócio e a integração com a API externa.
+
+```text
+┌──────────────────────────────────────────────────────────────┐
+│                     👤 CLIENTE / BROWSER                     │
+│                                                              │
+│              Interface Web (Razor Views)                     │
+└──────────────────────────────┬───────────────────────────────┘
+                               │
+                               │ HTTP Request
+                               ▼
+┌──────────────────────────────────────────────────────────────┐
+│                  🎮 WEATHER CONTROLLER                       │
+│                                                              │
+│  ┌──────────────┐  ┌──────────────┐  ┌───────────────────┐  │
+│  │    Index()   │  │  Detalhes()  │  │ PrevisaoCompleta()│  │
+│  └──────────────┘  └──────────────┘  └───────────────────┘  │
+│                                                              │
+│        Responsável por receber e processar requisições       │
+└──────────────────────────────┬───────────────────────────────┘
+                               │
+                               │ Chamada do serviço
+                               ▼
+┌──────────────────────────────────────────────────────────────┐
+│                     ⚙️ WEATHER SERVICE                       │
+│                                                              │
+│  ┌──────────────────────────┐  ┌──────────────────────────┐ │
+│  │ GetCurrentWeatherAsync() │  │ GetWeatherForecastAsync() │ │
+│  └──────────────────────────┘  └──────────────────────────┘ │
+│                                                              │
+│       Responsável pela lógica de negócio e integração        │
+└──────────────────────────────┬───────────────────────────────┘
+                               │
+                               │ HTTP Request
+                               ▼
+┌──────────────────────────────────────────────────────────────┐
+│                     🌤️ OPENWEATHER API                       │
+│                                                              │
+│       Fornece dados meteorológicos em tempo real             │
+│       e informações de previsão do tempo                     │
+└──────────────────────────────┬───────────────────────────────┘
+                               │
+                               │ JSON Response
+                               ▼
+┌──────────────────────────────────────────────────────────────┐
+│                     📦 MODELS / VIEWMODELS                   │
+│                                                              │
+│     WeatherResponse → WeatherViewModel → Razor View          │
+└──────────────────────────────────────────────────────────────┘
+```
+
+### 🔄 Fluxo da aplicação
+
+1. O **cliente** acessa a aplicação através do navegador.
+2. O **WeatherController** recebe a requisição.
+3. O Controller solicita os dados ao **WeatherService**.
+4. O **WeatherService** realiza a comunicação com a **OpenWeather API**.
+5. A API retorna os dados meteorológicos em formato **JSON**.
+6. Os dados são convertidos para os **Models/ViewModels** da aplicação.
+7. O Controller envia os dados para a **Razor View**.
+8. A View apresenta as informações ao usuário.
+
+### 📌 Responsabilidade de cada camada
+
+| Camada              | Responsabilidade                                     |
+| ------------------- | ---------------------------------------------------- |
+| **Controller**      | Receber requisições e controlar o fluxo da aplicação |
+| **Service**         | Executar regras de negócio e consumir a API externa  |
+| **Model**           | Representar os dados retornados pela API             |
+| **ViewModel**       | Preparar os dados para apresentação nas Views        |
+| **View**            | Exibir as informações ao usuário                     |
+| **OpenWeather API** | Fornecer os dados meteorológicos                     |
+
+Essa separação facilita a **manutenção, organização, testes e evolução** do projeto, mantendo cada componente responsável por uma função específica.
 
 
 
