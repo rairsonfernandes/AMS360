@@ -273,7 +273,7 @@ cd AMS360
 ```bash
 dotnet restore
 Configurar API Key
-`
+```
 
 # Opção 1: User Secrets (Recomendado)
 dotnet user-secrets init
