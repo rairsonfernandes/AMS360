@@ -300,7 +300,7 @@ docker run -d -p 5000:8080 --name ams360 ams360
 
 http://localhost:5000
 
-🌐 API Endpoints
+## 🌐 API Endpoints
 
 Endpoints Disponíveis
 Endpoint	Método	Descrição
@@ -345,7 +345,7 @@ Exemplo de Resposta da API
   ]
 }
 
-⚙️ Configuração
+## ⚙️ Configuração
 
 appsettings.json
 {
@@ -368,12 +368,12 @@ Variável	Descrição
 ASPNETCORE_ENVIRONMENT	Ambiente (Development/Production)
 WeatherApi__ApiKey	Chave da API OpenWeather
 
-🌍 Deploy
+## 🌍 Deploy
 
 Azure App Service
 
 bash
-# Fazer login no Azure
+## Fazer login no Azure
 az login
 
 # Criar App Service
@@ -389,13 +389,13 @@ Deploy automático!
 
 Heroku
 
-# Criar Procfile
+## Criar Procfile
 echo "web: dotnet AMS360.dll" > Procfile
 
-# Deploy
+## Deploy
 git push heroku main
 
-🛠️ Melhorias Futuras
+## 🛠️ Melhorias Futuras
 
 □ Testes unitários e de integração
 □ Gráficos de temperatura mais detalhados
@@ -406,7 +406,7 @@ git push heroku main
 □ Autenticação de usuários
 □ Favoritos (salvar cidades)
 
-🤝 Contribuições
+## 🤝 Contribuições
 
 Contribuições são bem-vindas! Consulte o arquivo CONTRIBUTING.md para mais detalhes.
 
@@ -420,11 +420,11 @@ Push para a branch (git push origin feature/AmazingFeature)
 
 Abra um Pull Request
 
-📄 Licença
+## 📄 Licença
 
 Este projeto está sob a licença MIT. Veja o arquivo LICENSE para mais detalhes.
 
-👨‍💻 Autor
+## 👨‍💻 Autor
 
 Rairson Fernandes
 
@@ -434,7 +434,7 @@ LinkedIn: Rairson Fernandes
 
 Email: rairsonfernandes@gmail.com
 
-🙏 Agradecimentos
+## 🙏 Agradecimentos
 
 OpenWeather pela API gratuita
 
@@ -442,4 +442,4 @@ Microsoft pelo .NET e ASP.NET Core
 
 Bootstrap pelo framework CSS
 
-⭐ Se você gostou deste projeto, deixe uma estrela no GitHub!
+## ⭐ Se você gostou deste projeto, deixe uma estrela no GitHub!
