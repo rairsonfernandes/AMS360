@@ -275,11 +275,11 @@ dotnet restore
 Configurar API Key
 ```
 
-# Opção 1: User Secrets (Recomendado)
+## Opção 1: User Secrets (Recomendado)
 dotnet user-secrets init
 dotnet user-secrets set "WeatherApi:ApiKey" "SUA_CHAVE_AQUI"
 
-# Opção 2: appsettings.json
+## Opção 2: appsettings.json
 # Edite o arquivo appsettings.json e adicione sua chave
 Executar o sistema
 
@@ -290,13 +290,14 @@ Acessar no navegador
 http://localhost:5000
 Com Docker
 
-# Build da imagem
+## Build da imagem
 docker build -t ams360 .
 
-# Executar o container
+## Executar o container
 docker run -d -p 5000:8080 --name ams360 ams360
 
-# Acessar
+## Acessar 
+
 http://localhost:5000
 
 🌐 API Endpoints
