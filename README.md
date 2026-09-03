@@ -1,4 +1,4 @@
-🌤️ AMS360 — Advanced Meteorological System 360
+## 🌤️ AMS360 — Advanced Meteorological System 360
 
 <div align="center">"AMS360 Banner" (wwwroot/images/banner.png)
 
@@ -13,7 +13,7 @@ Sistema moderno de monitoramento climático desenvolvido com ASP.NET Core e Open
 
 </div>---
 
-📖 Visão Geral
+## 📖 Visão Geral
 
 O AMS360 (Advanced Meteorological System 360) é uma aplicação web desenvolvida em ASP.NET Core 10, responsável por fornecer informações meteorológicas em tempo real e previsões climáticas através da integração com a API do OpenWeather.
 
@@ -21,9 +21,9 @@ O projeto foi construído seguindo princípios de Clean Architecture, boas prát
 
 ---
 
-✨ Principais Funcionalidades
+## ✨ Principais Funcionalidades
 
-🌦️ Monitoramento Climático
+## 🌦️ Monitoramento Climático
 
 - Consulta de clima em tempo real
 - Previsão meteorológica para até 7 dias
@@ -31,7 +31,7 @@ O projeto foi construído seguindo princípios de Clean Architecture, boas prát
 - Indicadores de temperatura, umidade, vento e pressão atmosférica
 - Atualização automática dos dados
 
-📊 Visualização de Dados
+## 📊 Visualização de Dados
 
 - Dashboard interativo
 - Gráficos dinâmicos utilizando Chart.js
@@ -39,7 +39,7 @@ O projeto foi construído seguindo princípios de Clean Architecture, boas prát
 - Interface moderna baseada em Glassmorphism
 - Layout totalmente responsivo
 
-🛡️ Confiabilidade
+## 🛡️ Confiabilidade
 
 - Health Checks
 - Rate Limiting
@@ -47,7 +47,7 @@ O projeto foi construído seguindo princípios de Clean Architecture, boas prát
 - Cache de consultas externas
 - Logs estruturados
 
-🚀 DevOps
+## 🚀 DevOps
 
 - Docker
 - GitHub Actions
