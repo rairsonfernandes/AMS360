@@ -409,66 +409,31 @@ Este projeto está sob a licença MIT. Veja o arquivo LICENSE para mais detalhes
 
 ## 👨‍💻 Autor
 
-**Rairson Fernandes**  
-Desenvolvedor Full Stack | .NET | ASP.NET Core | Cloud Computing
+<div align="center">
+
+### **Rairson Fernandes**  
+*Desenvolvedor Full Stack | .NET | ASP.NET Core*
 
 <br>
-
-<div align="center">
 
 [![GitHub](https://img.shields.io/badge/GitHub-@rairsonfernandes-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/rairsonfernandes)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Rairson_Fernandes-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/rairsonfernandes)
-[![Email](https://img.shields.io/badge/Email-rairsonfernandes@gmail.com-EA4335?style=for-the-badge&logo=gmail&logoColor=white)](mailto:rairsonfernandes@gmail.com)
-[![Portfolio](https://img.shields.io/badge/Portfolio-Em_Breve-FF6B6B?style=for-the-badge&logo=vercel&logoColor=white)](https://github.com/rairsonfernandes)
+[![Gmail](https://img.shields.io/badge/Gmail-rairsonfernandes-EA4335?style=for-the-badge&logo=gmail&logoColor=white)](mailto:rairsonfernandes@gmail.com)
 
 </div>
 
-<br>
+---
+
+### 📫 Onde me encontrar
+
+- 🐙 **GitHub:** [@rairsonfernandes](https://github.com/rairsonfernandes)
+- 🔗 **LinkedIn:** [Rairson Fernandes](https://linkedin.com/in/rairsonfernandes)
+- ✉️ **Email:** [rairsonfernandes@gmail.com](mailto:rairsonfernandes@gmail.com)
+- 🌐 **Portfolio:** Em breve
 
 ---
 
-### 💼 Sobre
-
-> 👋 Olá! Sou **Rairson Fernandes**, desenvolvedor apaixonado por tecnologia e inovação.  
-> Especializado em desenvolvimento de aplicações web escaláveis com **.NET** e **ASP.NET Core**.  
-> Sempre em busca de novos desafios e aprendizados.
-
----
-
-### 🚀 Tecnologias
-
-![C#](https://img.shields.io/badge/C%23-239120?style=for-the-badge&logo=csharp&logoColor=white)
-![.NET](https://img.shields.io/badge/.NET-512BD4?style=for-the-badge&logo=dotnet&logoColor=white)
-![ASP.NET](https://img.shields.io/badge/ASP.NET_Core-512BD4?style=for-the-badge&logo=dotnet&logoColor=white)
-![Azure](https://img.shields.io/badge/Azure-0078D4?style=for-the-badge&logo=microsoftazure&logoColor=white)
-![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
-![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white)
-
----
-
-### 📫 Contato
-
-| Canal | Contato |
-|-------|---------|
-| <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg" width="16" height="16" style="vertical-align: middle;"> **GitHub** | [@rairsonfernandes](https://github.com/rairsonfernandes) |
-| <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/linkedin.svg" width="16" height="16" style="vertical-align: middle;"> **LinkedIn** | [Rairson Fernandes](https://linkedin.com/in/rairsonfernandes) |
-| <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/gmail.svg" width="16" height="16" style="vertical-align: middle;"> **Email** | [rairsonfernandes@gmail.com](mailto:rairsonfernandes@gmail.com) |
-| <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/vercel.svg" width="16" height="16" style="vertical-align: middle;"> **Portfolio** | [Em breve](https://github.com/rairsonfernandes) |
-
----
-
-### ⭐ Vamos conectar?
-
-Fique à vontade para entrar em contato! Adoro conversar sobre tecnologia, projetos inovadores e novas oportunidades.
-
-<div align="center">
-
-[![GitHub Follow](https://img.shields.io/github/followers/rairsonfernandes?label=Follow&style=social)](https://github.com/rairsonfernandes)
-[![LinkedIn Follow](https://img.shields.io/badge/Connect-blue?style=social&logo=linkedin)](https://linkedin.com/in/rairsonfernandes)
-
-</div>
-
-
+> 💡 *"Transformando ideias em código e soluções em realidade."*
 
 
 
