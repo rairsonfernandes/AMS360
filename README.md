@@ -354,14 +354,28 @@ git push heroku main
 
 ## 🛠️ Melhorias Futuras
 
-□ Testes unitários e de integração
-□ Gráficos de temperatura mais detalhados
-□ Mapa de radar com precipitação em tempo real
-□ Alertas climáticos (notificações)
-□ Histórico de clima
-□ Suporte a múltiplos idiomas
-□ Autenticação de usuários
-□ Favoritos (salvar cidades)
+### 🧪 Qualidade e Testes
+- [ ] Testes unitários e de integração
+- [ ] Testes de performance e carga
+- [ ] Pipeline CI/CD com validação automatizada
+
+### 📊 Visualização de Dados
+- [ ] Gráficos de temperatura mais detalhados
+- [ ] Mapa de radar com precipitação em tempo real
+- [ ] Histórico de clima com linha do tempo interativa
+
+### 🔔 Funcionalidades
+- [ ] Alertas climáticos (notificações por email/push)
+- [ ] Suporte a múltiplos idiomas (i18n)
+- [ ] Autenticação de usuários (login social)
+- [ ] Favoritos (salvar cidades personalizadas)
+
+### 🎨 UX/UI
+- [ ] Tema claro/escuro
+- [ ] Layout responsivo para dispositivos móveis
+- [ ] Animações e transições suaves
+
+
 
 ## 🤝 Contribuições
 
