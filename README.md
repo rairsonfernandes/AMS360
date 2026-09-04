@@ -83,8 +83,6 @@
 
 ## 📦 Estrutura do Projeto
 
-## 📁 Estrutura do Projeto
-
 ```text
 AMS360/
 │
