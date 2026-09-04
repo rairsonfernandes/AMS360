@@ -321,9 +321,10 @@ Exemplo de Resposta da API
 }
 ```
 Variáveis de Ambiente
-Variável	Descrição
-ASPNETCORE_ENVIRONMENT	Ambiente (Development/Production)
-WeatherApi__ApiKey	Chave da API OpenWeather
+Variável	Descrição	Obrigatório
+ASPNETCORE_ENVIRONMENT	Ambiente de execução (Development/Production)	❌
+WeatherApi__ApiKey	Chave da API OpenWeather	✅
+
 
 ## 🌍 Deploy
 
