@@ -342,10 +342,6 @@ az webapp config appsettings set --name ams360 --settings WeatherApi__ApiKey="SU
 
 ```
 
-
-# Fazer login no Azure
-az login
-
 # Criar App Service
 az webapp up --name ams360 --runtime "DOTNET:10" --sku F1
 Railway
