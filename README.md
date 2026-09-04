@@ -330,7 +330,19 @@ WeatherApi__ApiKey	Chave da API OpenWeather	✅
 
 Azure App Service
 
-bash
+```bash
+# Fazer login no Azure
+az login
+
+# Criar App Service (Plano Gratuito F1)
+az webapp up --name ams360 --runtime "DOTNET:8" --sku F1
+
+# Definir variável de ambiente
+az webapp config appsettings set --name ams360 --settings WeatherApi__ApiKey="SUA_CHAVE_AQUI"
+
+```
+
+
 # Fazer login no Azure
 az login
 
