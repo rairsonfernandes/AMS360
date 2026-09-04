@@ -304,7 +304,7 @@ Exemplo de Resposta da API
 
 ## ⚙️ Configuração
 
-appsettings.json
+```bash
 {
   "Logging": {
     "LogLevel": {
@@ -319,7 +319,7 @@ appsettings.json
   },
   "AllowedHosts": "*"
 }
-
+```
 Variáveis de Ambiente
 Variável	Descrição
 ASPNETCORE_ENVIRONMENT	Ambiente (Development/Production)
