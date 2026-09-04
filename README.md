@@ -318,10 +318,13 @@ Exemplo de Resposta da API
   "AllowedHosts": "*"
 }
 ```
-Variáveis de Ambiente
-Variável	Descrição	Obrigatório
-ASPNETCORE_ENVIRONMENT	Ambiente de execução (Development/Production)	❌
-WeatherApi__ApiKey	Chave da API OpenWeather	✅
+
+### Variáveis de Ambiente
+
+| Variável | Descrição | Obrigatório |
+|----------|-----------|:-----------:|
+| `ASPNETCORE_ENVIRONMENT` | Ambiente de execução (Development/Production) | ❌ |
+| `WeatherApi__ApiKey` | Chave da API OpenWeather | ✅ |
 
 
 ## 🌍 Deploy
