@@ -409,31 +409,24 @@ Este projeto está sob a licença MIT. Veja o arquivo LICENSE para mais detalhes
 
 ## 👨‍💻 Autor
 
-<div align="center">
-
-### **Rairson Fernandes**  
+**Rairson Fernandes**  
 *Desenvolvedor Full Stack | .NET | ASP.NET Core*
 
-<br>
-
-[![GitHub](https://img.shields.io/badge/GitHub-@rairsonfernandes-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/rairsonfernandes)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Rairson_Fernandes-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/rairsonfernandes)
-[![Gmail](https://img.shields.io/badge/Gmail-rairsonfernandes-EA4335?style=for-the-badge&logo=gmail&logoColor=white)](mailto:rairsonfernandes@gmail.com)
-
+<div align="center">
+  <a href="https://github.com/rairsonfernandes" target="_blank">
+    <img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub">
+  </a>
+  <a href="https://linkedin.com/in/rairsonfernandes" target="_blank">
+    <img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn">
+  </a>
+  <a href="mailto:rairsonfernandes@gmail.com" target="_blank">
+    <img src="https://img.shields.io/badge/Gmail-EA4335?style=for-the-badge&logo=gmail&logoColor=white" alt="Gmail">
+  </a>
 </div>
 
----
-
-### 📫 Onde me encontrar
-
-- 🐙 **GitHub:** [@rairsonfernandes](https://github.com/rairsonfernandes)
-- 🔗 **LinkedIn:** [Rairson Fernandes](https://linkedin.com/in/rairsonfernandes)
-- ✉️ **Email:** [rairsonfernandes@gmail.com](mailto:rairsonfernandes@gmail.com)
-- 🌐 **Portfolio:** Em breve
-
----
-
-> 💡 *"Transformando ideias em código e soluções em realidade."*
+📧 **E-mail:** [rairsonfernandes@gmail.com](mailto:rairsonfernandes@gmail.com)  
+💼 **LinkedIn:** [/in/rairsonfernandes](https://linkedin.com/in/rairsonfernandes)  
+🐙 **GitHub:** [@rairsonfernandes](https://github.com/rairsonfernandes)
 
 
 
