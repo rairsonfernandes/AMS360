@@ -1,0 +1,157 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 820" font-family="'Segoe UI', Arial, sans-serif">
+  <defs>
+    <linearGradient id="headerGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#2c3e50"/>
+      <stop offset="100%" stop-color="#3498db"/>
+    </linearGradient>
+    <linearGradient id="boxGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f8f9fa"/>
+      <stop offset="100%" stop-color="#e9ecef"/>
+    </linearGradient>
+    <linearGradient id="controllerGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#e3f2fd"/>
+      <stop offset="100%" stop-color="#bbdefb"/>
+    </linearGradient>
+    <linearGradient id="serviceGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#e8f5e9"/>
+      <stop offset="100%" stop-color="#c8e6c9"/>
+    </linearGradient>
+    <linearGradient id="apiGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#fff3e0"/>
+      <stop offset="100%" stop-color="#ffe0b2"/>
+    </linearGradient>
+    <linearGradient id="modelGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f3e5f5"/>
+      <stop offset="100%" stop-color="#e1bee7"/>
+    </linearGradient>
+    <filter id="shadow" x="-3%" y="-3%" width="106%" height="106%">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#00000020"/>
+    </filter>
+    <filter id="shadowDeep" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="3" stdDeviation="6" flood-color="#00000030"/>
+    </filter>
+    <marker id="arrowDown" markerWidth="10" markerHeight="8" refX="5" refY="4" orient="auto">
+      <path d="M0,0 L5,4 L10,0 L10,2 L5,6 L0,2 Z" fill="#5d6d7e"/>
+    </marker>
+    <marker id="arrowUp" markerWidth="10" markerHeight="8" refX="5" refY="4" orient="auto">
+      <path d="M0,4 L5,0 L10,4 L10,2 L5,-2 L0,2 Z" fill="#5d6d7e"/>
+    </marker>
+    <marker id="arrowDownGreen" markerWidth="10" markerHeight="8" refX="5" refY="4" orient="auto">
+      <path d="M0,0 L5,4 L10,0 L10,2 L5,6 L0,2 Z" fill="#27ae60"/>
+    </marker>
+    <marker id="arrowUpOrange" markerWidth="10" markerHeight="8" refX="5" refY="4" orient="auto">
+      <path d="M0,4 L5,0 L10,4 L10,2 L5,-2 L0,2 Z" fill="#e67e22"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="900" height="820" rx="12" fill="#f0f2f5"/>
+
+  <!-- Title -->
+  <text x="450" y="38" text-anchor="middle" font-size="20" font-weight="bold" fill="#2c3e50">Arquitetura da Aplicação — Previsão do Tempo</text>
+
+  <!-- ====== LAYER 1: CLIENTE ====== -->
+  <rect x="180" y="55" width="540" height="90" rx="10" fill="url(#boxGrad)" stroke="#bdc3c7" stroke-width="1.5" filter="url(#shadow)"/>
+  <rect x="180" y="55" width="540" height="32" rx="10" fill="url(#headerGrad)"/>
+  <rect x="180" y="77" width="540" height="10" fill="url(#headerGrad)"/>
+  <text x="450" y="76" text-anchor="middle" font-size="14" font-weight="bold" fill="#ffffff">👤 CLIENTE / BROWSER</text>
+  <text x="450" y="110" text-anchor="middle" font-size="13" fill="#34495e">Interface Web (Razor Views)</text>
+  <text x="450" y="132" text-anchor="middle" font-size="11" fill="#7f8c8d">HTML, CSS, JavaScript — Interação com o usuário</text>
+
+  <!-- Arrow: Cliente → Controller -->
+  <line x1="450" y1="145" x2="450" y2="178" stroke="#5d6d7e" stroke-width="2" marker-end="url(#arrowDown)"/>
+  <rect x="390" y="154" width="120" height="18" rx="4" fill="#ecf0f1" stroke="#bdc3c7" stroke-width="0.5"/>
+  <text x="450" y="167" text-anchor="middle" font-size="9" fill="#5d6d7e">HTTP Request</text>
+
+  <!-- ====== LAYER 2: CONTROLLER ====== -->
+  <rect x="120" y="188" width="660" height="130" rx="10" fill="url(#controllerGrad)" stroke="#90caf9" stroke-width="1.5" filter="url(#shadowDeep)"/>
+  <rect x="120" y="188" width="660" height="32" rx="10" fill="#1976d2"/>
+  <rect x="120" y="210" width="660" height="10" fill="#1976d2"/>
+  <text x="450" y="209" text-anchor="middle" font-size="14" font-weight="bold" fill="#ffffff">🎮 WEATHER CONTROLLER</text>
+
+  <!-- Controller methods -->
+  <rect x="155" y="235" width="170" height="40" rx="6" fill="#ffffff" stroke="#64b5f6" stroke-width="1.2"/>
+  <text x="240" y="252" text-anchor="middle" font-size="12" font-weight="bold" fill="#0d47a1">Index()</text>
+  <text x="240" y="268" text-anchor="middle" font-size="9" fill="#5d6d7e">Página inicial</text>
+
+  <rect x="365" y="235" width="170" height="40" rx="6" fill="#ffffff" stroke="#64b5f6" stroke-width="1.2"/>
+  <text x="450" y="252" text-anchor="middle" font-size="12" font-weight="bold" fill="#0d47a1">Detalhes()</text>
+  <text x="450" y="268" text-anchor="middle" font-size="9" fill="#5d6d7e">Detalhes da cidade</text>
+
+  <rect x="575" y="235" width="170" height="40" rx="6" fill="#ffffff" stroke="#64b5f6" stroke-width="1.2"/>
+  <text x="660" y="252" text-anchor="middle" font-size="12" font-weight="bold" fill="#0d47a1">PrevisaoCompleta()</text>
+  <text x="660" y="268" text-anchor="middle" font-size="9" fill="#5d6d7e">Previsão estendida</text>
+
+  <text x="450" y="304" text-anchor="middle" font-size="10" fill="#1565c0" font-style="italic">Responsável por receber e processar requisições</text>
+
+  <!-- Arrow: Controller → Service -->
+  <line x1="450" y1="318" x2="450" y2="351" stroke="#27ae60" stroke-width="2" marker-end="url(#arrowDownGreen)"/>
+  <rect x="380" y="327" width="140" height="18" rx="4" fill="#e8f5e9" stroke="#a5d6a7" stroke-width="0.5"/>
+  <text x="450" y="340" text-anchor="middle" font-size="9" fill="#27ae60">Chamada do serviço</text>
+
+  <!-- ====== LAYER 3: SERVICE ====== -->
+  <rect x="150" y="361" width="600" height="110" rx="10" fill="url(#serviceGrad)" stroke="#81c784" stroke-width="1.5" filter="url(#shadowDeep)"/>
+  <rect x="150" y="361" width="600" height="32" rx="10" fill="#2e7d32"/>
+  <rect x="150" y="383" width="600" height="10" fill="#2e7d32"/>
+  <text x="450" y="382" text-anchor="middle" font-size="14" font-weight="bold" fill="#ffffff">⚙️ WEATHER SERVICE</text>
+
+  <rect x="195" y="406" width="230" height="36" rx="6" fill="#ffffff" stroke="#66bb6a" stroke-width="1.2"/>
+  <text x="310" y="422" text-anchor="middle" font-size="12" font-weight="bold" fill="#1b5e20">GetCurrentWeatherAsync()</text>
+  <text x="310" y="437" text-anchor="middle" font-size="9" fill="#5d6d7e">Tempo atual por cidade</text>
+
+  <rect x="475" y="406" width="230" height="36" rx="6" fill="#ffffff" stroke="#66bb6a" stroke-width="1.2"/>
+  <text x="590" y="422" text-anchor="middle" font-size="12" font-weight="bold" fill="#1b5e20">GetWeatherForecastAsync()</text>
+  <text x="590" y="437" text-anchor="middle" font-size="9" fill="#5d6d7e">Previsão para os próximos dias</text>
+
+  <text x="450" y="460" text-anchor="middle" font-size="10" fill="#1b5e20" font-style="italic">Responsável pela lógica de negócio e integração</text>
+
+  <!-- Arrow: Service → API -->
+  <line x1="450" y1="471" x2="450" y2="504" stroke="#e67e22" stroke-width="2" marker-end="url(#arrowDown)"/>
+  <rect x="390" y="480" width="120" height="18" rx="4" fill="#fff3e0" stroke="#ffcc80" stroke-width="0.5"/>
+  <text x="450" y="493" text-anchor="middle" font-size="9" fill="#e67e22">HTTP Request</text>
+
+  <!-- ====== LAYER 4: API ====== -->
+  <rect x="200" y="514" width="500" height="85" rx="10" fill="url(#apiGrad)" stroke="#ffb74d" stroke-width="1.5" filter="url(#shadowDeep)"/>
+  <rect x="200" y="514" width="500" height="32" rx="10" fill="#e65100"/>
+  <rect x="200" y="536" width="500" height="10" fill="#e65100"/>
+  <text x="450" y="535" text-anchor="middle" font-size="14" font-weight="bold" fill="#ffffff">🌤️ OPENWEATHER API</text>
+  <text x="450" y="567" text-anchor="middle" font-size="11" fill="#4e342e">Fornece dados meteorológicos em tempo real</text>
+  <text x="450" y="586" text-anchor="middle" font-size="11" fill="#4e342e">e informações de previsão do tempo</text>
+
+  <!-- Arrow: API → Models -->
+  <line x1="450" y1="599" x2="450" y2="632" stroke="#8e24aa" stroke-width="2" marker-end="url(#arrowUp)"/>
+  <rect x="390" y="608" width="120" height="18" rx="4" fill="#f3e5f5" stroke="#ce93d8" stroke-width="0.5"/>
+  <text x="450" y="621" text-anchor="middle" font-size="9" fill="#8e24aa">JSON Response</text>
+
+  <!-- ====== LAYER 5: MODELS ====== -->
+  <rect x="170" y="642" width="560" height="80" rx="10" fill="url(#modelGrad)" stroke="#ba68c8" stroke-width="1.5" filter="url(#shadowDeep)"/>
+  <rect x="170" y="642" width="560" height="32" rx="10" fill="#6a1b9a"/>
+  <rect x="170" y="664" width="560" height="10" fill="#6a1b9a"/>
+  <text x="450" y="663" text-anchor="middle" font-size="14" font-weight="bold" fill="#ffffff">📦 MODELS / VIEWMODELS</text>
+
+  <rect x="210" y="685" width="155" height="26" rx="5" fill="#ffffff" stroke="#ce93d8" stroke-width="1"/>
+  <text x="287" y="702" text-anchor="middle" font-size="11" fill="#4a148c">WeatherResponse</text>
+
+  <text x="390" y="702" text-anchor="middle" font-size="16" fill="#7b1fa2">→</text>
+
+  <rect x="420" y="685" width="155" height="26" rx="5" fill="#ffffff" stroke="#ce93d8" stroke-width="1"/>
+  <text x="497" y="702" text-anchor="middle" font-size="11" fill="#4a148c">WeatherViewModel</text>
+
+  <text x="600" y="702" text-anchor="middle" font-size="16" fill="#7b1fa2">→</text>
+
+  <rect x="640" y="685" width="70" height="26" rx="5" fill="#ffffff" stroke="#ce93d8" stroke-width="1"/>
+  <text x="675" y="702" text-anchor="middle" font-size="11" fill="#4a148c">View</text>
+
+  <!-- Footer -->
+  <text x="450" y="760" text-anchor="middle" font-size="11" fill="#95a5a6">Arquitetura em camadas com separação de responsabilidades</text>
+
+  <!-- Legend -->
+  <rect x="280" y="775" width="12" height="12" rx="2" fill="#1976d2"/>
+  <text x="296" y="785" font-size="10" fill="#5d6d7e">Controller</text>
+  <rect x="380" y="775" width="12" height="12" rx="2" fill="#2e7d32"/>
+  <text x="396" y="785" font-size="10" fill="#5d6d7e">Service</text>
+  <rect x="480" y="775" width="12" height="12" rx="2" fill="#e65100"/>
+  <text x="496" y="785" font-size="10" fill="#5d6d7e">API</text>
+  <rect x="560" y="775" width="12" height="12" rx="2" fill="#6a1b9a"/>
+  <text x="576" y="785" font-size="10" fill="#5d6d7e">Models</text>
+</svg>
