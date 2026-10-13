@@ -1,6 +1,7 @@
 {
   "services": {
     "ams-weather": {
+      "root": "./",
       "runtime": "container",
       "entrypoint": "Dockerfile.vercel"
     }
