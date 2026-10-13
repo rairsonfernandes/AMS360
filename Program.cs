@@ -5,10 +5,10 @@ using System.IO.Compression;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
+var port = Environment.GetEnvironmentVariable("PORT") ?? "80";
 builder.WebHost.UseUrls($"http://0.0.0.0:{port}");
 
-// Configurar User Secrets (apenas em desenvolvimento)
+// Configurar User Secrets (apenas desenvolvimento local)
 if (builder.Environment.IsDevelopment())
 {
     builder.Configuration.AddUserSecrets<Program>();
@@ -65,7 +65,7 @@ else
     app.UseExceptionHandler("/Home/Error");
 }
 
-
+// tentar redirecionar de volta para HTTPS.
 
 app.UseStaticFiles();
 app.UseRouting();
