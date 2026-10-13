@@ -5,6 +5,10 @@ using System.IO.Compression;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Configurar porta para Vercel
+var port = Environment.GetEnvironmentVariable("PORT") ?? "80";
+builder.WebHost.UseUrls($"http://0.0.0.0:{port}");
+
 // Configurar User Secrets
 if (builder.Environment.IsDevelopment())
 {
@@ -63,7 +67,7 @@ else
     app.UseHsts();
 }
 
-app.UseHttpsRedirection();
+
 app.UseStaticFiles();
 app.UseRouting();
 
