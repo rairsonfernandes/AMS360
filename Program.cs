@@ -1,15 +1,14 @@
-﻿using AMS360.Services;
+using AMS360.Services;
 using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.AspNetCore.ResponseCompression;
 using System.IO.Compression;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Configurar porta para Vercel
-var port = Environment.GetEnvironmentVariable("PORT") ?? "80";
+var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
 builder.WebHost.UseUrls($"http://0.0.0.0:{port}");
 
-// Configurar User Secrets
+// Configurar User Secrets (apenas em desenvolvimento)
 if (builder.Environment.IsDevelopment())
 {
     builder.Configuration.AddUserSecrets<Program>();
@@ -64,16 +63,14 @@ if (app.Environment.IsDevelopment())
 else
 {
     app.UseExceptionHandler("/Home/Error");
-    app.UseHsts();
 }
+
 
 
 app.UseStaticFiles();
 app.UseRouting();
 
-// USE RATE LIMITING
 app.UseRateLimiter();
-
 app.UseCors("AllowAll");
 app.UseAuthorization();
 
