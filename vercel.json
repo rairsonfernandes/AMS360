@@ -1,0 +1,14 @@
+{
+  "services": {
+    "ams360": {
+      "runtime": "container",
+      "entrypoint": "Dockerfile.vercel"
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": { "service": "ams360" }
+    }
+  ]
+}
