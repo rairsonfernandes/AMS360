@@ -1,43 +1,27 @@
 # ============================================
-# Stage 1: Build - usa o SDK completo do .NET 10
+# Stage 1: Build - SDK completo do .NET 10
 # ============================================
 FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
 WORKDIR /src
 
-# Copia apenas o .csproj e restaura as dependências
-# (isso aproveita o cache do Docker em builds futuros)
 COPY ["AMS360.csproj", "./"]
 RUN dotnet restore "AMS360.csproj"
 
-# Copia todo o resto do código
 COPY . .
-
-# Compila em modo Release e publica para /app/publish
-RUN dotnet publish "AMS360.csproj" \
-    -c Release \
-    -o /app/publish \
-    --no-restore
+RUN dotnet publish "AMS360.csproj" -c Release -o /app/publish --no-restore
 
 # ============================================
-# Stage 2: Runtime - imagem enxuta só com ASP.NET
+# Stage 2: Runtime - imagem enxuta
 # ============================================
 FROM mcr.microsoft.com/dotnet/aspnet:10.0 AS final
 WORKDIR /app
 
-# Copia os arquivos publicados do stage anterior
 COPY --from=build /app/publish .
 
-# Configurações de ambiente
 ENV ASPNETCORE_ENVIRONMENT=Production
 ENV DOTNET_RUNNING_IN_CONTAINER=true
-
-# ⚠️ IMPORTANTE: A Vercel fornece a porta via variável $PORT.
-# O Kestrel precisa ouvir em 0.0.0.0 nessa porta.
-# Se $PORT não estiver definida, usa 80 como fallback.
 ENV ASPNETCORE_URLS=http://0.0.0.0:${PORT:-80}
 
-# Expõe a porta 80 (documentação; a Vercel usa $PORT dinamicamente)
 EXPOSE 80
 
-# Ponto de entrada da aplicação
 ENTRYPOINT ["dotnet", "AMS360.dll"]
