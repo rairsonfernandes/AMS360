@@ -1,35 +1,18 @@
-# ============================================
-# Stage 1: Build - SDK completo do .NET 10
-# ============================================
 FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
 WORKDIR /src
 
-# Copia apenas o .csproj e restaura as dependências (cache)
 COPY ["AMS360.csproj", "./"]
 RUN dotnet restore "AMS360.csproj"
 
-# Copia o resto do código e publica
 COPY . .
 RUN dotnet publish "AMS360.csproj" -c Release -o /app/publish --no-restore
 
-# ============================================
-# Stage 2: Runtime - imagem enxuta
-# ============================================
 FROM mcr.microsoft.com/dotnet/aspnet:10.0 AS final
 WORKDIR /app
-
-# Copia apenas o que foi publicado
 COPY --from=build /app/publish .
 
-# Configurações de ambiente para produção
 ENV ASPNETCORE_ENVIRONMENT=Production
-ENV DOTNET_RUNNING_IN_CONTAINER=true
+ENV ASPNETCORE_URLS=http://0.0.0.0:${PORT:-80}
 
-# A Vercel injeta a porta via variável $PORT.
-# Se não existir, usa 8080 como fallback (porta padrão dos containers .NET 8+)
-ENV ASPNETCORE_URLS=http://0.0.0.0:${PORT:-8080}
-
-# Expõe a porta (documentação, a Vercel usa a $PORT dinamicamente)
-EXPOSE 8080
-
+EXPOSE 80
 ENTRYPOINT ["dotnet", "AMS360.dll"]
